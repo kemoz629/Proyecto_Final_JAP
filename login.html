@@ -2,37 +2,152 @@
 <html lang="es">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
+  <!-- Configuración básica del documento -->
+  <meta charset="UTF-8">
+  <title>Login</title>
   
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: rgb(248, 249, 250);
-    }
-  </style>
+  <!-- Enlaces a hojas de estilo CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet"> <!-- Framework Bootstrap para diseño responsive -->
+  <link href="css/styles.css" rel="stylesheet"> <!-- Estilos personalizados del proyecto -->
 </head>
 
-<body>
-  <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
-  <script src="js/login.js"></script>
+<body class="login-bg"> <!-- Clase CSS que aplica el fondo gris al body -->
+  
+  <!-- Contenedor principal de la página -->
+  <main class="container-fluid">
+    
+    <!-- Sistema de grillas de Bootstrap para centrar el contenido -->
+    <div class="row justify-content-center">
+      
+      <!-- Columna responsive que se adapta a diferentes tamaños de pantalla -->
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+        
+        <!-- Tarjeta principal del formulario de login -->
+        <div class="card login-card">
+          
+          <!-- Contenedor del icono de candado -->
+          <div class="login-icon">
+            <!-- SVG del icono de candado - se usa SVG para mayor calidad y escalabilidad -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Rectángulo que representa el cuerpo del candado -->
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+              <!-- Arco superior del candado que representa el gancho -->
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          
+          <!-- Título principal del formulario -->
+          <h2 class="login-title">Inicio de sesión</h2>
+          
+          <!-- Subtítulo explicativo -->
+          <div class="login-subtitle">Ingresa tus credenciales para acceder a tu cuenta</div>
+          
+          <!-- Formulario de login con ID para JavaScript -->
+          <form id="loginForm">
+            
+            <!-- Campo de correo electrónico -->
+            <div class="login-input-container">
+              <!-- Etiqueta del campo -->
+              <label for="usuario" class="form-label login-label">Correo electrónico</label>
+              
+              <!-- Contenedor para posicionar el icono dentro del input -->
+              <div class="position-relative">
+                
+                <!-- Icono de correo que aparece dentro del input -->
+                <span class="login-input-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Rectángulo que representa el sobre -->
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <!-- Línea que representa la solapa del sobre -->
+                    <polyline points="3,7 12,13 21,7" />
+                  </svg>
+                </span>
+                
+                <!-- Campo de entrada para el email -->
+                <input type="email" class="form-control login-input" id="usuario" placeholder="tu@ejemplo.com" 
+                       required autocomplete="username">
+                <!-- 
+                  - type="email": Valida automáticamente que sea un email válido
+                  - required: Campo obligatorio
+                  - autocomplete="username": Ayuda al navegador a recordar credenciales
+                -->
+              </div>
+            </div>
+            
+            <!-- Campo de contraseña -->
+            <div class="login-input-container">
+              <!-- Etiqueta del campo -->
+              <label for="contrasena" class="form-label login-label">Contraseña</label>
+              
+              <!-- Contenedor para posicionar iconos dentro del input -->
+              <div class="position-relative">
+                
+                <!-- Icono de candado que aparece dentro del input -->
+                <span class="login-input-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Cuerpo del candado -->
+                    <rect x="6" y="10" width="12" height="8" rx="2" />
+                    <!-- Gancho superior del candado -->
+                    <path d="M9 10V8a3 3 0 0 1 6 0v2" />
+                  </svg>
+                </span>
+                
+                <!-- Campo de entrada para la contraseña -->
+                <input type="password" class="form-control login-input" id="contrasena" placeholder="••••••••" 
+                       required autocomplete="current-password">
+                
+                <!-- Botón para mostrar/ocultar contraseña -->
+                <button type="button" id="togglePassword" class="login-password-toggle"
+                  aria-label="Mostrar u ocultar contraseña">
+                  <!-- Icono de ojo para mostrar/ocultar contraseña -->
+                  <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Forma del ojo -->
+                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+                    <!-- Pupila del ojo -->
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Opciones adicionales del formulario -->
+            <div class="login-options">
+              
+              <!-- Checkbox para recordar usuario -->
+              <div class="login-remember">
+                <input type="checkbox" id="recordarme">
+                <label for="recordarme">Recordarme</label>
+              </div>
+              
+              <!-- Enlace para recuperar contraseña -->
+              <a href="#" class="login-link">¿Olvidaste tu contraseña?</a>
+            </div>
+            
+            <!-- Botón de envío del formulario -->
+            <button type="submit" class="btn login-btn">Iniciar sesión</button>
+          </form>
+          
+          <!-- Mensaje de error (oculto por defecto) -->
+          <div id="loginError" class="alert alert-danger mt-3 d-none" role="alert">
+            Debe completar ambos campos.
+          </div>
+          
+          <!-- Enlace para registro de nuevos usuarios -->
+          <div class="login-register">
+            ¿No tienes una cuenta? <a href="#">Regístrate aquí</a>
+          </div>
+          
+        </div> <!-- Fin de login-card -->
+      </div> <!-- Fin de columna -->
+    </div> <!-- Fin de row -->
+  </main> <!-- Fin de contenedor principal -->
+  
+  <!-- Scripts JavaScript -->
+  <script src="js/login.js"></script> <!-- Archivo con toda la lógica del login -->
+  
 </body>
-
 </html>

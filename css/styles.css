@@ -188,3 +188,219 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+/* =============================
+   LOGIN - Estilos personalizados para la página de inicio de sesión
+   
+   DESCRIPCIÓN: Estos estilos crean un diseño moderno y limpio para
+   el formulario de login, incluyendo efectos hover, transiciones
+   y un diseño responsive que se adapta a diferentes tamaños de pantalla.
+   ============================= */
+
+/* Fondo principal de la página de login */
+.login-bg {
+  background: #f1f3f4; /* Color gris claro de fondo */
+  min-height: 100vh; /* Altura mínima de toda la pantalla */
+  display: flex; /* Flexbox para centrar contenido */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+  padding: 2rem 1rem; /* Espaciado interno para dispositivos móviles */
+}
+
+/* Tarjeta principal que contiene todo el formulario */
+.login-card {
+  border: none; /* Sin borde por defecto */
+  border-radius: 16px; /* Bordes redondeados modernos */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Sombra sutil */
+  padding: 3rem 2.5rem; /* Espaciado interno generoso */
+  background: #fff; /* Fondo blanco */
+  max-width: 420px; /* Ancho máximo de la tarjeta */
+  width: 100%; /* Ancho completo hasta el máximo */
+}
+
+/* Contenedor del icono de candado en la parte superior */
+.login-icon {
+  width: 80px; /* Ancho del círculo */
+  height: 80px; /* Alto del círculo */
+  background: #d1ecf1; /* Fondo azul claro */
+  border-radius: 50%; /* Forma circular perfecta */
+  display: flex; /* Flexbox para centrar el icono */
+  align-items: center; /* Centra verticalmente el icono */
+  justify-content: center; /* Centra horizontalmente el icono */
+  margin: 0 auto 2rem auto; /* Centrado y margen inferior */
+}
+
+/* Estilos específicos para el SVG del icono de candado */
+.login-icon svg {
+  width: 32px; /* Ancho del icono */
+  height: 32px; /* Alto del icono */
+  stroke: #17a2b8; /* Color azul del trazo */
+  fill: none; /* Sin relleno, solo contorno */
+  stroke-width: 2; /* Grosor del trazo */
+  stroke-linecap: round; /* Extremos redondeados */
+  stroke-linejoin: round; /* Uniones redondeadas */
+}
+
+/* Título principal "Inicio de sesión" */
+.login-title {
+  font-weight: 700; /* Texto en negrita */
+  font-size: 2.25rem; /* Tamaño de fuente grande */
+  text-align: center; /* Centrado */
+  margin-bottom: 0.75rem; /* Margen inferior */
+  color: #2c3e50; /* Color gris oscuro */
+}
+
+/* Subtítulo explicativo debajo del título */
+.login-subtitle {
+  color: #6c757d; /* Color gris medio */
+  text-align: center; /* Centrado */
+  margin-bottom: 2.5rem; /* Margen inferior generoso */
+  font-size: 1rem; /* Tamaño de fuente normal */
+  line-height: 1.4; /* Altura de línea para mejor lectura */
+}
+
+/* Etiquetas de los campos (ej: "Correo electrónico") */
+.login-label {
+  font-weight: 500; /* Texto semi-negrita */
+  color: #495057; /* Color gris oscuro */
+  margin-bottom: 0.5rem; /* Margen inferior pequeño */
+  font-size: 0.95rem; /* Tamaño de fuente ligeramente menor */
+}
+
+/* Contenedor de cada campo de entrada (email, contraseña) */
+.login-input-container {
+  position: relative; /* Posicionamiento relativo para iconos absolutos */
+  margin-bottom: 1.5rem; /* Espacio entre campos */
+}
+
+/* Campos de entrada de texto (inputs) */
+.login-input {
+  padding-left: 3rem; /* Espacio izquierdo para el icono */
+  padding-right: 3rem; /* Espacio derecho para botones */
+  height: 54px; /* Altura fija del campo */
+  border: 1px solid #dee2e6; /* Borde gris claro */
+  border-radius: 10px; /* Bordes redondeados */
+  font-size: 1rem; /* Tamaño de fuente normal */
+  transition: all 0.2s ease; /* Transición suave para efectos */
+  width: 100%; /* Ancho completo */
+  background: #f8f9fa; /* Fondo gris muy claro */
+}
+
+/* Estado de focus (cuando el usuario hace clic en el campo) */
+.login-input:focus {
+  border-color: #17a2b8; /* Borde azul cuando está activo */
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.15); /* Sombra azul sutil */
+  outline: none; /* Sin contorno por defecto del navegador */
+  background: #fff; /* Fondo blanco cuando está activo */
+}
+
+/* Iconos dentro de los campos de entrada (lado izquierdo) */
+.login-input-icon {
+  position: absolute; /* Posicionamiento absoluto */
+  left: 1rem; /* A 1rem del borde izquierdo */
+  top: 50%; /* A la mitad de la altura */
+  transform: translateY(-50%); /* Centrado vertical perfecto */
+  color: #adb5bd; /* Color gris claro */
+}
+
+/* Botón para mostrar/ocultar contraseña (lado derecho) */
+.login-password-toggle {
+  position: absolute; /* Posicionamiento absoluto */
+  right: 1rem; /* A 1rem del borde derecho */
+  top: 50%; /* A la mitad de la altura */
+  transform: translateY(-50%); /* Centrado vertical perfecto */
+  background: none; /* Sin fondo */
+  border: none; /* Sin borde */
+  color: #adb5bd; /* Color gris claro */
+  cursor: pointer; /* Cursor de mano al pasar por encima */
+  padding: 0.5rem; /* Área de clic más grande */
+  border-radius: 6px; /* Bordes ligeramente redondeados */
+  transition: color 0.2s ease; /* Transición suave del color */
+}
+
+/* Efecto hover para el botón de mostrar/ocultar contraseña */
+.login-password-toggle:hover {
+  color: #17a2b8; /* Cambia a azul al pasar el mouse */
+}
+
+/* Contenedor de las opciones del formulario (checkbox y enlace) */
+.login-options {
+  display: flex; /* Flexbox para distribución horizontal */
+  justify-content: space-between; /* Espacio entre elementos */
+  align-items: center; /* Alineación vertical */
+  margin-bottom: 2rem; /* Margen inferior */
+  font-size: 0.9rem; /* Tamaño de fuente ligeramente menor */
+}
+
+/* Contenedor del checkbox "Recordarme" */
+.login-remember {
+  display: flex; /* Flexbox para alinear checkbox y texto */
+  align-items: center; /* Alineación vertical */
+  gap: 0.5rem; /* Espacio entre checkbox y texto */
+}
+
+/* Estilos para el checkbox "Recordarme" */
+.login-remember input[type="checkbox"] {
+  width: 18px; /* Ancho del checkbox */
+  height: 18px; /* Alto del checkbox */
+  accent-color: #17a2b8; /* Color azul cuando está marcado */
+}
+
+/* Enlaces (ej: "¿Olvidaste tu contraseña?") */
+.login-link {
+  color: #17a2b8; /* Color azul */
+  text-decoration: none; /* Sin subrayado */
+  font-weight: 500; /* Texto semi-negrita */
+}
+
+/* Efecto hover para los enlaces */
+.login-link:hover {
+  text-decoration: underline; /* Subrayado al pasar el mouse */
+  color: #138496; /* Azul más oscuro */
+}
+
+/* Botón principal "Iniciar sesión" */
+.login-btn {
+  background: #17a2b8; /* Fondo azul */
+  border: none; /* Sin borde */
+  font-weight: 600; /* Texto negrita */
+  font-size: 1.1rem; /* Tamaño de fuente ligeramente mayor */
+  height: 54px; /* Altura que coincide con los inputs */
+  border-radius: 10px; /* Bordes redondeados que coinciden con inputs */
+  color: white !important; /* Texto blanco (importante para sobrescribir Bootstrap) */
+  transition: all 0.3s ease; /* Transición suave para efectos */
+  width: 100%; /* Ancho completo */
+  margin-bottom: 1.5rem; /* Margen inferior */
+}
+
+/* Efectos hover para el botón principal */
+.login-btn:hover {
+  background: #138496; /* Azul más oscuro */
+  color: white !important; /* Mantiene el texto blanco */
+  transform: translateY(-2px); /* Efecto de elevación sutil */
+  box-shadow: 0 6px 20px rgba(23, 162, 184, 0.3); /* Sombra azul al hacer hover */
+}
+
+/* Texto de registro en la parte inferior */
+.login-register {
+  text-align: center; /* Centrado */
+  font-size: 0.95rem; /* Tamaño de fuente ligeramente menor */
+  color: #6c757d; /* Color gris medio */
+}
+
+/* Enlaces dentro del texto de registro */
+.login-register a {
+  color: #17a2b8; /* Color azul */
+  text-decoration: none; /* Sin subrayado */
+  font-weight: 500; /* Texto semi-negrita */
+}
+
+/* Efecto hover para enlaces de registro */
+.login-register a:hover {
+  text-decoration: underline; /* Subrayado al pasar el mouse */
+  color: #138496; /* Azul más oscuro */
+}
+
+/* =============================
+   FIN LOGIN
+   ============================= */

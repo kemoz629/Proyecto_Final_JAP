@@ -2,6 +2,11 @@
 <html lang="es">
 
 <head>
+  <script>
+    if (!localStorage.getItem("usuario")) {
+      window.location.href = "login.html";
+    }
+  </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
@@ -44,7 +49,14 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item dropdown" id="userDropdownContainer" style="display:none;">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <span id="userName"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><button class="dropdown-item" id="logoutBtn">Cerrar sesión</button></li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -62,12 +74,27 @@
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
-  <script src="js/my-profile.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const usuario = localStorage.getItem("usuario");
+      if (usuario) {
+        const userDropdownContainer = document.getElementById("userDropdownContainer");
+        const userName = document.getElementById("userName");
+        userDropdownContainer.style.display = "block";
+        userName.textContent = usuario;
+        document.getElementById("logoutBtn").addEventListener("click", function () {
+          localStorage.removeItem("usuario");
+          window.location.href = "login.html";
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
