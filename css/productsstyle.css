@@ -1,0 +1,60 @@
+body {
+  background-image: url('../img/productsBackground.jpg'); /* Reemplazá con tu imagen */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+
+.card {
+  background: whitesmoke;
+  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+.card-title,
+.card-text,
+.card p,
+.card small {
+  color: black;
+}
+.card-img-top {
+  object-fit: cover;
+  height: 180px;
+  border-radius: 12px 12px 0 0;
+}
+
+.btn{
+    background: rgba(255, 255, 255, 0.15); /* Blanco translúcido */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: gainsboro;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.15); /* Blanco translúcido */
+  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.box-transparente{
+    background: rgba(255, 255, 255, 0.15); /* Blanco translúcido */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 30px;
+    margin-top: 6%;
+}
+
+#cat-title{
+    color: black;
+    margin-bottom: 20px;
+}
+
+.lead {
+  color: black;
+}
