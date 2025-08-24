@@ -9,19 +9,26 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: rgb(248, 249, 250);
-    }
-  </style>
+  <link href="css/login.css" rel="stylesheet">
 </head>
 
 <body>
-  <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+  <!-- Contenedor externo para centrar el login -->
+  <main class="login-outer">
+    <div class="login-box">
+      <!-- Título principal -->
+      <div class="login-title">Inicio de sesión</div>
+      <!-- Mensaje de error (oculto por defecto) -->
+      <div id="loginError" class="login-error">Debe completar ambos campos.</div>
+      <!-- Formulario de login -->
+      <form id="loginForm" autocomplete="on">
+        <input type="email" id="usuario" class="login-input" placeholder="Correo electrónico" autocomplete="username" required>
+        <input type="password" id="contrasena" class="login-input" placeholder="Contraseña" autocomplete="current-password" required>
+        <a href="#" class="login-link">¿Olvidaste tu contraseña?</a>
+        <button type="submit" class="login-btn">Iniciar sesión</button>
+      </form>
+      <!-- Enlace para registrarse -->
+      <div class="login-register">Registrarse</div>
     </div>
   </main>
   <footer class="text-muted">
