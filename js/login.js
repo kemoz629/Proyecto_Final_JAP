@@ -1,13 +1,10 @@
-// login.js
-// Lógica de validación y gestión de sesión para el login
-
 // Espera a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', function () {
 	// Referencias a los elementos del formulario
-	const form = document.getElementById('loginForm');
-	const usuario = document.getElementById('usuario');
-	const contrasena = document.getElementById('contrasena');
-	const errorMsg = document.getElementById('loginError');
+	let form = document.getElementById('loginForm');
+	let usuario = document.getElementById('usuario');
+	let contrasena = document.getElementById('contrasena');
+	let errorMsg = document.getElementById('loginError');
 
 	// Si ya hay sesión iniciada, redirige a portada (index.html)
 	if (localStorage.getItem('usuarioLogueado')) {
@@ -36,9 +33,3 @@ document.addEventListener('DOMContentLoaded', function () {
 		window.location.href = 'index.html';
 	});
 });
-
-// Protección para otras páginas: si no hay sesión, redirige a login.html
-// (Este fragmento se puede reutilizar en otras páginas JS)
-// if (!localStorage.getItem('usuarioLogueado')) {
-//   window.location.href = 'login.html';
-// }
