@@ -39,3 +39,21 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+let usuario = localStorage.getItem("usuarioLogueado");
+  if (usuario) {
+  let userDropdownContainer = document.getElementById("userDropdownContainer");
+  let userName = document.getElementById("userName");
+    userDropdownContainer.style.display = "block";
+    userName.textContent = usuario;
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+      localStorage.removeItem("usuarioLogueado");
+      window.location.href = "login.html";
+    });
+  }
+});
+
+if (!localStorage.getItem('usuarioLogueado')) {
+    window.location.href = 'login.html';
+}
