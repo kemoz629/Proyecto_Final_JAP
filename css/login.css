@@ -192,6 +192,7 @@ footer {
     padding: 50% 2.5rem 2rem 2.5rem;
     background: url("../img/fondo_login.jpg");
     position: relative;
+    overflow: hidden;
   }
 
   main {
