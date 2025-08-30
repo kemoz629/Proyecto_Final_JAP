@@ -1,11 +1,10 @@
 body {
-  background-image: url('../img/productsBackground.jpg'); /* Reemplazá con tu imagen */
+  background-image: url("../img/productsBackground.jpg"); /* Reemplazá con tu imagen */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
-
 
 .card {
   background: whitesmoke;
@@ -26,9 +25,9 @@ body {
   border-radius: 12px 12px 0 0;
 }
 
-.btn{
-    background: rgba(255, 255, 255, 0.15); /* Blanco translúcido */
-    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+.btn {
+  background: rgba(255, 255, 255, 0.15); /* Blanco translúcido */
+  backdrop-filter: blur(10px); /* Efecto de desenfoque */
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: gainsboro;
@@ -41,69 +40,63 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.box-transparente{
-    background: rgba(255, 255, 255, 0.15); /* Blanco translúcido */
-    backdrop-filter: blur(10px); /* Efecto de desenfoque */
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 30px;
-    margin-top: 6%;
+.box-transparente {
+  background: rgba(255, 255, 255, 0.15); /* Blanco translúcido */
+  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 30px;
+  margin-top: 6%;
 }
-
 
 .lead {
   color: black;
 }
 
-.redondearBtnDerecha{
+.redondearBtnDerecha {
   border-radius: 0 12px 12px 0 !important;
 }
 
 /* Smartphones (hasta 767px) */
-@media (max-width: 768px ) {
-  
-#cat-title{
+@media (max-width: 768px) {
+  #cat-title {
     color: black;
     margin-bottom: 20px;
     display: block;
     font-size: xxx-large;
-    margin-top: -5%; 
-}
+    margin-top: -5%;
+  }
 
-.lead {
-  color: black;
-  font-size: x-large;
-}
+  .lead {
+    color: black;
+    font-size: x-large;
+  }
 
-.redondearBtnIzquierda{
-  border-radius: 12px 0 0 12px !important;
-}
+  .redondearBtnIzquierda {
+    border-radius: 12px 0 0 12px !important;
+  }
+
+  .colorUserMobile {
+    color: #ffffffbf;
+  }
 }
 
 /* Tablets (768px a 1024px) */
 @media (min-width: 768px) and (max-width: 1023px) {
-  #cat-title{
+  #cat-title {
     color: black;
     margin-bottom: 20px;
     display: block;
     font-size: xxx-large;
-}
-
-  
-  
+  }
 }
 
 /* Escritorio (desde 1025px en adelante) */
 @media (min-width: 1024px) {
-  
-#cat-title{
+  #cat-title {
     color: black;
     margin-bottom: 20px;
     display: block;
     font-size: xxx-large;
-
-    
-}
- 
- 
+  }
 }
