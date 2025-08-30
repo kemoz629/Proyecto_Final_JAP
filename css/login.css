@@ -1,3 +1,5 @@
+
+
 body {
   height: 100vh;
   background: url("../img/fondo_login.jpg");
@@ -99,4 +101,57 @@ footer {
   font-size: 1rem;
   display: none;
   font-weight: 500;
+}
+
+.logo-login {
+  display: none;
+}
+
+
+/* Smartphone pequeño: 320 x 568 px */
+@media (max-width: 568PX) {
+  .login-box {
+    position: relative;  
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0 1.5rem;
+    max-width: 100%;
+  }
+  .login-title {
+  font-size: 1.9rem;
+  }
+
+  footer.text-muted{
+    display: none;
+  }
+  
+  .login-register {
+    position: absolute;
+    bottom: 0; 
+    left: 0;
+  }
+
+  .login-btn {
+    position: absolute;
+    bottom: 0; 
+    right: 0;
+    font-size: 1rem;
+    border-radius: 0;
+  }
+}
+/* Smartphone grande: 569px hasta 769px */
+@media (min-widtg: 569px) and (max-width: 768px) {
+
+}
+
+/* Tableta en Modo Vertical: 768 x 1024 px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  
+}
+
+/* Resolución Estándar: 1366 x 768 px  */
+@media (min-width: 769px) and (max-width:1366px) {
+  #loginBox {
+  }
 }
