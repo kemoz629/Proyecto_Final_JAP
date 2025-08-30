@@ -100,3 +100,81 @@ footer {
   display: none;
   font-weight: 500;
 }
+.header-mobile{
+    display: none;
+  }
+  .logo-jap {
+    display:none;
+  }
+
+@media (max-width: 568px) {
+  .login-outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-box {
+    background: none;
+    border-radius: 12px;
+    box-shadow: none;
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    max-width: 399px;
+    width: 81%;
+    text-align: center;
+    border: none;
+    height: 70%;
+}
+.login-title {
+    text-align: left;
+    font-size: 175%;
+    font-weight: 863;
+    color: #ffb300;
+    margin-bottom: 2rem;
+    /* letter-spacing: 0.5px; */
+}
+.login-input {
+    height: 12vw;
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid #ffb300;
+    border-radius: 6px;
+    font-size: 102%;
+    margin-bottom: 16%;
+    background: #fff;
+    color: #444;
+    transition: border-color 0.2s;
+}
+
+.login-link {
+    color: #444;
+    font-size: small;
+    margin-bottom: 1.5rem;
+    display: block;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+footer{
+  display: none;
+}
+
+.header-mobile{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10vh;
+    width: 100vw;
+    background: #e5e3e1;
+  }
+
+
+  .logo-jap {
+    height: 100%;
+    width: 80%;
+    object-fit: contain;
+    object-position: center;
+  }
+  
+}
