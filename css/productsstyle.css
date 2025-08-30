@@ -55,6 +55,10 @@ body {
   color: black;
 }
 
+.redondearBtnDerecha{
+  border-radius: 0 12px 12px 0 !important;
+}
+
 /* Smartphones (hasta 767px) */
 @media (max-width: 768px ) {
   
@@ -69,6 +73,10 @@ body {
 .lead {
   color: black;
   font-size: x-large;
+}
+
+.redondearBtnIzquierda{
+  border-radius: 12px 0 0 12px !important;
 }
 }
 
