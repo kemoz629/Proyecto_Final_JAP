@@ -103,7 +103,7 @@ footer {
   font-weight: 500;
 }
 
-.logo-login {
+.contenedor-logo {
   display: none;
 }
 
@@ -151,26 +151,28 @@ footer {
     margin:0;
     color: #282828;
   }
+
   main {
     height: 100%;
   }
 
   .logo-login {
-    background-color: #e2e1e1 ;
-    display: block;
-    position:absolute;
+    background-color: transparent ;
     object-position: center;
     object-fit:contain;
     width:90%;
-    margin-top: 0;
     margin-left: 1rem;
-    height: 4rem;
+    height: 100%;
   }
 
   .contenedor-logo {
-    background-color: #f3f1f1 ;
-    max-width: 100%;
-    height: 100vh;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 12vh;
+    width: 100vw;
+    background: #f3f1f1;
   }
 
   .login-input {
@@ -185,16 +187,35 @@ footer {
 }
 /* Smartphone grande: 569px hasta 769px */
 @media (min-widtg: 569px) and (max-width: 768px) {
-
+  footer.text-muted{
+    display: none;
+  }
 }
 
 /* Tableta en Modo Vertical: 768 x 1024 px */
 @media (min-width: 769px) and (max-width: 1024px) {
-  
-}
+   .login-title {
+    font-size:30px;
+  }
 
-/* Resolución Estándar: 1366 x 768 px  */
-@media (min-width: 769px) and (max-width:1366px) {
-  #loginBox {
+  .login-input {
+    padding: 0.6rem 1rem; 
+  }
+
+  .login-register  {
+    font-size: 15px;
+  }
+
+  .login-btn {
+    width: 60%;
+    font-size: 15px;
+  }
+
+  .login-box {
+    padding: 2.5rem 3.5rem 2rem 3.5rem; 
+  }
+
+  .login-input {
+    width: 82%;
   }
 }
