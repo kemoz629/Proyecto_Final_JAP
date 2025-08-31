@@ -188,3 +188,47 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+/* Smartphones (hasta 767px) */
+@media (max-width: 768px) {
+  #cat-title {
+    color: black;
+    margin-bottom: 20px;
+    display: block;
+    font-size: xxx-large;
+    margin-top: -5%;
+  }
+
+  .lead {
+    color: black;
+    font-size: x-large;
+  }
+
+  .redondearBtnIzquierda {
+    border-radius: 12px 0 0 12px !important;
+  }
+
+  .colorUserMobile {
+    color: #ffffffbf;
+  }
+}
+
+/* Tablets (768px a 1024px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #cat-title {
+    color: black;
+    margin-bottom: 20px;
+    display: block;
+    font-size: xxx-large;
+  }
+}
+
+/* Escritorio (desde 1025px en adelante) */
+@media (min-width: 1024px) {
+  #cat-title {
+    color: black;
+    margin-bottom: 20px;
+    display: block;
+    font-size: xxx-large;
+  }
+}

@@ -186,7 +186,7 @@ footer {
 
 }
 /* Smartphone grande: 569px hasta 769px */
-@media (min-widtg: 569px) and (max-width: 768px) {
+@media (min-width: 569px) and (max-width: 768px) {
   footer.text-muted{
     display: none;
   }
