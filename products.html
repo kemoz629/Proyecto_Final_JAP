@@ -11,6 +11,59 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="css/productsstyle.css">
+  <style>
+    /* Estilos para la barra de búsqueda */
+    .search-container {
+      margin: 20px 0;
+      position: relative;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .search-container input[type="search"] {
+      width: 100%;
+      padding: 10px 45px 10px 20px;
+      border: 2px solid #ddd;
+      border-radius: 25px;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    .search-container input[type="search"]:focus {
+      outline: none;
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+    .search-btn {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #6c757d;
+      cursor: pointer;
+    }
+    .no-results {
+      text-align: center;
+      padding: 30px;
+      color: #6c757d;
+      font-style: italic;
+    }
+    .clear-search {
+      display: none;
+      position: absolute;
+      right: 45px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #6c757d;
+      cursor: pointer;
+    }
+    .search-container:hover .clear-search {
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
@@ -60,6 +113,15 @@
       <p class="lead">Verás aquí todos los productos disponibles.</p>
     </div>
 
+    <!-- Barra de búsqueda añadida aquí -->
+    <div class="search-container">
+      <input type="search" id="searchInput" placeholder="Buscar autos por nombre exacto...">
+      <button class="clear-search" id="clearSearch">×</button>
+      <button class="search-btn" id="searchButton">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+
     <!-- Orden filtrado -->
     <div class="row mb-4 ">
       <div class="d-flex justify-content-start justify-content-md-center mb-4 ms-2 ms-md-0">
@@ -80,28 +142,27 @@
     </div>
 
     <!-- Filtro precios -->
-<div class="d-flex justify-content-start justify-content-md-center mb-4 ms-2 ms-md-0" id="barraprecio">
-  <div class="row align-items-center g-2 w-50">
-    <div class="col-12 col-md-2">
-      <h6 class="mb-0 text-md-end fw-bold">Precio</h6>
-    </div>
-    <div class="col-6  col-md-2">
-      <input class="form-control" type="number" placeholder="mín." id="rangeFilterPriceMin">
-    </div>
-    <div class="col-6 col-md-2">
-      <input class="form-control" type="number" placeholder="máx." id="rangeFilterPriceMax">
-    </div>
-    <div class="col-12 col-md-3 d-flex gap-2">
-      <button class="btn btn-primary w-100" id="rangeFilterPrice">Filtrar</button>
-      <button class="btn btn-outline-secondary w-100" id="clearRangeFilter">Limpiar</button>
-    </div>
-  </div>
-</div>
-
-      <div class="container box-transparente py-4">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="prod-list-container">
-
+    <div class="d-flex justify-content-start justify-content-md-center mb-4 ms-2 ms-md-0" id="barraprecio">
+      <div class="row align-items-center g-2 w-50">
+        <div class="col-12 col-md-2">
+          <h6 class="mb-0 text-md-end fw-bold">Precio</h6>
         </div>
+        <div class="col-6  col-md-2">
+          <input class="form-control" type="number" placeholder="mín." id="rangeFilterPriceMin">
+        </div>
+        <div class="col-6 col-md-2">
+          <input class="form-control" type="number" placeholder="máx." id="rangeFilterPriceMax">
+        </div>
+        <div class="col-12 col-md-3 d-flex gap-2">
+          <button class="btn btn-primary w-100" id="rangeFilterPrice">Filtrar</button>
+          <button class="btn btn-outline-secondary w-100" id="clearRangeFilter">Limpiar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container box-transparente py-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="prod-list-container">
+
       </div>
     </div>
   </main>
@@ -128,6 +189,57 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
-</body>
+ <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('searchInput');
+  const searchButton = document.getElementById('searchButton');
+  const clearSearch = document.getElementById('clearSearch');
+  const productContainer = document.getElementById('prod-list-container');
 
-</html>
+  function applySearchFilter() {
+    // Usa window.allProducts, que siempre tendrá los productos correctos
+    const allProducts = window.allProducts || [];
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    let filteredProducts = [];
+
+    if (searchTerm) {
+      filteredProducts = allProducts.filter(product =>
+        product.name.toLowerCase().includes(searchTerm)
+      );
+    } else {
+      filteredProducts = allProducts;
+    }
+
+    showProductsList(filteredProducts);
+
+    // Mostrar mensaje si no hay resultados
+    if (filteredProducts.length === 0 && searchTerm) {
+      productContainer.innerHTML = '<div class="col-12 no-results">No se encontró el auto "' + searchTerm + '".</div>';
+    }
+
+    clearSearch.style.display = searchTerm ? 'block' : 'none';
+  }
+
+  function performSearch() {
+    applySearchFilter();
+  }
+
+  function clearSearchFunction() {
+    searchInput.value = '';
+    applySearchFilter();
+  }
+
+  searchButton.addEventListener('click', performSearch);
+  clearSearch.addEventListener('click', clearSearchFunction);
+  searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      performSearch();
+    }
+  });
+  searchInput.addEventListener('input', performSearch);
+});
+</script>
+
+    
+  
+</body>
