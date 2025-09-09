@@ -19,9 +19,11 @@ function sortProducts(criteria, array) {
     return result;
 }
 
-function showProductsList() {
+function showProductsList(array = undefined) {
   let htmlContentToAppend = "";
-  for (let product of currentProductsArray) {
+  // Si se pasa un array, úsalo; si no, usa el global
+  const productsToShow = Array.isArray(array) ? array : currentProductsArray;
+  for (let product of productsToShow) {
     if (
       (minPrice === undefined || product.cost >= minPrice) &&
       (maxPrice === undefined || product.cost <= maxPrice)
@@ -69,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     getJSONData(PRODUCTS_URL + catID + EXT_TYPE).then(function (resultObj) {
         if (resultObj.status === "ok") {
             currentProductsArray = resultObj.data.products;
+            window.allProducts = currentProductsArray; // <-- Agrega esta línea
             document.getElementById("cat-title").innerText = resultObj.data.catName;
             showProductsList();
         }
