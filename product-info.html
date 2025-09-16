@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
+  <title>eMercado - Producto</title>
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -43,13 +43,68 @@
       </div>
     </div>
   </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+
+  <div class="product-container"> <!--Columna que contiene imágenes-->
+    <main class="container my-5">
+      <div class="row g-4 contenedor-info">  
+        <div class="col-md-5">
+          <div class="product-carousel">
+            <div id="product-images-carousel" class="carousel slide">
+              <div class="carousel-inner" id="carousel-images-container">
+                <!-- Botones para ir hacia adelante o atrás en las imágenes -->
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#product-images-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#product-images-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4"> <!-- Información del producto -->
+          <div class="product-info">
+            <h1 id="product-name" class="product-name">NOMBRE PRODUCTO</h1>
+            <hr class="linea-divisoria">
+            
+            <div class="info-subtitulos">Sobre este producto</div>
+            <p id="product-description" class="product-description"></p>
+            <hr class="linea-divisoria">
+            
+            <div class="info-subtitulos">Información adicional</div>
+            <ul class="product-info-list">
+              <li>
+                <span class="info-label">• Ventas totales:</span>
+                <span id="product-sold-count" class="info-value"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-3"> <!--Columna que contiene precio-->
+          <div class="contenedor-precios">
+            <div class="card p-3 info-precios">
+              <div class="card-body">
+                <h2 class="precio-monto" id="product-price"></h2>
+                <div class="promo"> <!--Tarjeta de promo-->
+                  <div class="promo-titulo">10% OFF EXTRA con cupón: JAP-2025</div>
+                  <div class="promo-subtitulo">¡Comprá en hasta 12 cuotas sin interés con todas tus tarjetas!</div>
+                </div>
+                <div class="action-buttons d-grid gap-2">
+                  <button class="btn boton-comprar" type="button">Comprar</button>
+                  <button class="btn boton-carrito" type="button">Agregar al carro</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
+  </div>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -58,6 +113,7 @@
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -66,6 +122,7 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
