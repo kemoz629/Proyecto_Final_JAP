@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     getJSONData(PRODUCTS_URL + catID + EXT_TYPE).then(function (resultObj) {
         if (resultObj.status === "ok") {
             currentProductsArray = resultObj.data.products;
-            window.allProducts = currentProductsArray; // <-- Agrega esta línea
+            window.allProducts = currentProductsArray; // <-- Agregamos todos los productos a una variable global
             document.getElementById("cat-title").innerText = resultObj.data.catName;
             showProductsList();
         }
