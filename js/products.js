@@ -66,6 +66,7 @@ function setProductID(id) {
     window.location = "product-info.html";
 }
 
+// Funcionalidades de filtros y ordenamiento
 document.addEventListener("DOMContentLoaded", function () {
     const catID = localStorage.getItem("catID");
     getJSONData(PRODUCTS_URL + catID + EXT_TYPE).then(function (resultObj) {
@@ -106,4 +107,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
         showProductsList();
     });
+});
+
+// Funcionalidad de búsqueda
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('searchInput');
+  const searchButton = document.getElementById('searchButton');
+  const clearSearch = document.getElementById('clearSearch');
+  const productContainer = document.getElementById('prod-list-container');
+
+  function applySearchFilter() {
+    // Usa window.allProducts, que siempre tendrá los productos correctos
+    const allProducts = window.allProducts || [];
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    let filteredProducts = [];
+
+    if (searchTerm) {
+      filteredProducts = allProducts.filter(product =>
+        product.name.toLowerCase().includes(searchTerm)
+      );
+    } else {
+      filteredProducts = allProducts;
+    }
+
+    showProductsList(filteredProducts);
+
+    // Mostrar mensaje si no hay resultados
+    if (filteredProducts.length === 0 && searchTerm) {
+      productContainer.innerHTML = '<div class="col-12 no-results">No se encontró  "' + searchTerm + '".</div>';
+    }
+
+    clearSearch.style.display = searchTerm ? 'block' : 'none';
+  }
+
+  function performSearch() {
+    applySearchFilter();
+  }
+
+  function clearSearchFunction() {
+    searchInput.value = '';
+    applySearchFilter();
+  }
+
+  searchButton.addEventListener('click', performSearch);
+  clearSearch.addEventListener('click', clearSearchFunction);
+  searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      performSearch();
+    }
+  });
+  searchInput.addEventListener('input', performSearch);
 });

@@ -11,59 +11,6 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="css/productsstyle.css">
-  <style>
-    /* Estilos para la barra de búsqueda */
-    .search-container {
-      margin: 20px 0;
-      position: relative;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .search-container input[type="search"] {
-      width: 100%;
-      padding: 10px 45px 10px 20px;
-      border: 2px solid #ddd;
-      border-radius: 25px;
-      font-size: 16px;
-      transition: all 0.3s;
-    }
-    .search-container input[type="search"]:focus {
-      outline: none;
-      border-color: #0d6efd;
-      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-    }
-    .search-btn {
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: #6c757d;
-      cursor: pointer;
-    }
-    .no-results {
-      text-align: center;
-      padding: 30px;
-      color: #6c757d;
-      font-style: italic;
-    }
-    .clear-search {
-      display: none;
-      position: absolute;
-      right: 45px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: #6c757d;
-      cursor: pointer;
-    }
-    .search-container:hover .clear-search {
-      display: block;
-    }
-  </style>
 </head>
 
 <body>
@@ -189,59 +136,6 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
- <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const searchInput = document.getElementById('searchInput');
-  const searchButton = document.getElementById('searchButton');
-  const clearSearch = document.getElementById('clearSearch');
-  const productContainer = document.getElementById('prod-list-container');
-
-  function applySearchFilter() {
-    // Usa window.allProducts, que siempre tendrá los productos correctos
-    const allProducts = window.allProducts || [];
-    const searchTerm = searchInput.value.toLowerCase().trim();
-    let filteredProducts = [];
-
-    if (searchTerm) {
-      filteredProducts = allProducts.filter(product =>
-        product.name.toLowerCase().includes(searchTerm)
-      );
-    } else {
-      filteredProducts = allProducts;
-    }
-
-    showProductsList(filteredProducts);
-
-    // Mostrar mensaje si no hay resultados
-    if (filteredProducts.length === 0 && searchTerm) {
-      productContainer.innerHTML = '<div class="col-12 no-results">No se encontró  "' + searchTerm + '".</div>';
-    }
-
-    clearSearch.style.display = searchTerm ? 'block' : 'none';
-  }
-
-  function performSearch() {
-    applySearchFilter();
-  }
-
-  function clearSearchFunction() {
-    searchInput.value = '';
-    applySearchFilter();
-  }
-
-  searchButton.addEventListener('click', performSearch);
-  clearSearch.addEventListener('click', clearSearchFunction);
-  searchInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      performSearch();
-    }
-  });
-  searchInput.addEventListener('input', performSearch);
-});
-</script>
-
-    
-  
 </body>
 
 </html>
