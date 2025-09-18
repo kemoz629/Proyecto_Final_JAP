@@ -66,55 +66,63 @@ function setProductID(id) {
     window.location = "product-info.html";
 }
 
-// Funcionalidades de filtros y ordenamiento
 document.addEventListener("DOMContentLoaded", function () {
-    const catID = localStorage.getItem("catID");
-    getJSONData(PRODUCTS_URL + catID + EXT_TYPE).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            currentProductsArray = resultObj.data.products;
-            window.allProducts = currentProductsArray; // <-- Agregamos todos los productos a una variable global
-            document.getElementById("cat-title").innerText = resultObj.data.catName;
-            showProductsList();
-        }
-    });
+  // Obtener el ID de la categoría desde localStorage
+  const catID = localStorage.getItem("catID");
 
-    document.getElementById("sortAsc").addEventListener("click", () => {
-        sortAndShowProducts(ORDER_ASC_BY_COST);
-    });
+  // Cargar los productos de la categoría
+  getJSONData(PRODUCTS_URL + catID + EXT_TYPE).then(function (resultObj) {
+      if (resultObj.status === "ok") {
+          currentProductsArray = resultObj.data.products;
+          window.allProducts = currentProductsArray; // <-- Agregamos todos los productos a una variable global
+          window.categoryName = resultObj.data.catName; // <-- Agregamos el nombre de la categoría a una variable global
+          document.getElementById("cat-title").innerText = resultObj.data.catName;
+          showProductsList();
+          filterProductsBySearchTerm();
+      }
+  });
 
-    document.getElementById("sortDesc").addEventListener("click", () => {
-        sortAndShowProducts(ORDER_DESC_BY_COST);
-    });
+  // Funcionalidades de filtros y ordenamiento
+  document.getElementById("sortAsc").addEventListener("click", () => {
+      sortAndShowProducts(ORDER_ASC_BY_COST);
+  });
 
-    document.getElementById("sortByCount").addEventListener("click", () => {
-        sortAndShowProducts(ORDER_BY_SOLD_COUNT);
-    });
+  document.getElementById("sortDesc").addEventListener("click", () => {
+      sortAndShowProducts(ORDER_DESC_BY_COST);
+  });
 
-    document.getElementById("clearRangeFilter").addEventListener("click", () => {
-        document.getElementById("rangeFilterPriceMin").value = "";
-        document.getElementById("rangeFilterPriceMax").value = "";
-        minPrice = undefined;
-        maxPrice = undefined;
-        showProductsList();
-    });
+  document.getElementById("sortByCount").addEventListener("click", () => {
+      sortAndShowProducts(ORDER_BY_SOLD_COUNT);
+  });
 
-    document.getElementById("rangeFilterPrice").addEventListener("click", () => {
-        minPrice = parseInt(document.getElementById("rangeFilterPriceMin").value);
-        maxPrice = parseInt(document.getElementById("rangeFilterPriceMax").value);
+  document.getElementById("clearRangeFilter").addEventListener("click", () => {
+      document.getElementById("rangeFilterPriceMin").value = "";
+      document.getElementById("rangeFilterPriceMax").value = "";
+      minPrice = undefined;
+      maxPrice = undefined;
+      showProductsList();
+  });
 
-        if (isNaN(minPrice)) minPrice = undefined;
-        if (isNaN(maxPrice)) maxPrice = undefined;
+  document.getElementById("rangeFilterPrice").addEventListener("click", () => {
+      minPrice = parseInt(document.getElementById("rangeFilterPriceMin").value);
+      maxPrice = parseInt(document.getElementById("rangeFilterPriceMax").value);
 
-        showProductsList();
-    });
+      if (isNaN(minPrice)) minPrice = undefined;
+      if (isNaN(maxPrice)) maxPrice = undefined;
+
+      showProductsList();
+  });
 });
 
 // Funcionalidad de búsqueda
-document.addEventListener('DOMContentLoaded', function() {
+function filterProductsBySearchTerm() {
   const searchInput = document.getElementById('searchInput');
   const searchButton = document.getElementById('searchButton');
   const clearSearch = document.getElementById('clearSearch');
   const productContainer = document.getElementById('prod-list-container');
+
+  // Actualiza el placeholder con el nombre de la categoría
+  searchInput.setAttribute("placeholder", `Buscar ${window.categoryName}`);
 
   function applySearchFilter() {
     // Usa window.allProducts, que siempre tendrá los productos correctos
@@ -156,5 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
       performSearch();
     }
   });
+  
   searchInput.addEventListener('input', performSearch);
-});
+}
