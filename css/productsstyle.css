@@ -54,8 +54,16 @@ body {
   color: black;
 }
 
+.btnProductInfo{
+  background-color: rgb(19, 87, 22);
+}
+
 .redondearBtnDerecha {
   border-radius: 0 12px 12px 0 !important;
+}
+
+.infProd{
+  height: 75vh;
 }
 
 /* Smartphones (hasta 767px) */
@@ -79,6 +87,10 @@ body {
 
   .colorUserMobile {
     color: #ffffffbf;
+  }
+
+  .infProd{
+    height: auto;
   }
 }
 
