@@ -11,6 +11,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="css/productsstyle.css">
+
 </head>
 
 <body>
@@ -68,6 +69,17 @@
           <hr>
           <h5>Información adicional</h5>
           <p><strong>Ventas totales:</strong> <span id="soldCount"></span></p>
+          <hr>
+          <h5>Califica el producto</h5>
+          <div class="text-left">
+            <div class="star-rating">
+              <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+              <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+              <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+              <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+              <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -98,7 +110,10 @@
   <!-- SPINNER -->
   <div id="spinner-wrapper">
     <div class="lds-ring">
-      <div></div><div></div><div></div><div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
   </div>
 

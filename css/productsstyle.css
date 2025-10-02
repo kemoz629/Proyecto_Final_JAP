@@ -94,6 +94,40 @@ body {
   }
 }
 
+
+    /* Estrellas de calificación */
+    .star-rating {
+      direction: rtl;
+      display: inline-flex;
+      font-size: 2rem;
+      justify-content: center;
+    }
+
+    .star-rating input {
+      display: none;
+    }
+
+    .star-rating label {
+      color: #ccc;
+      cursor: pointer;
+      font-size: 2rem;
+      padding: 0 3px;
+      transition: color 0.2s;
+    }
+
+    .star-rating label:before {
+      content: "\2605"; /* Estrella unicode */
+    }
+
+    .star-rating input:checked~label {
+      color: #ffc107;
+    }
+
+    .star-rating label:hover,
+    .star-rating label:hover~label {
+      color: #ffda66;
+    }
+
 /* Tablets (768px a 1024px) */
 @media (min-width: 768px) and (max-width: 1023px) {
   #cat-title {
