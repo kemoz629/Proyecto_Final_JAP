@@ -28,6 +28,44 @@ document.addEventListener("DOMContentLoaded", function () {
         thumb.onclick = () => mainImg.src = img;
         thumbnails.appendChild(thumb);
       });
+      let productID = localStorage.getItem("productID") || 50921;
+
+      // Funcion para mostrar calificaciones
+      function mostrarCalificaciones () {
+        const ratings = JSON.parse (localStorage.getItem("ratings_" + productID)) || [];
+        const ratingsList = document.getElementById("ratingsList");
+        ratingsList.innerHTML = "";
+        ratings.forEach(rating => {
+          const li = document.createElement("li");
+          li.innerHTML = `<strong>${rating.user}:</strong> ${rating.score}/5 - ${rating.comment}`;
+          ratingsList.appendChild(li);
+        });
+      }
+      mostrarCalificaciones();
     }
+    // Evento para agregar una nueva calificación
+document.getElementById("addRatingForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const user = document.getElementById("ratingUser").value;
+  const score = parseInt(document.getElementById("ratingScore").value);
+  const comment = document.getElementById("ratingComment").value;
+  const nuevaCalificacion = { user, score, comment };
+
+  // Obtener calificaciones actuales y agregar la nueva
+  const ratings = JSON.parse(localStorage.getItem("ratings_" + productID)) || [];
+  ratings.push(nuevaCalificacion);
+
+  // Guardar en localStorage
+  localStorage.setItem("ratings_" + productID, JSON.stringify(ratings));
+
+  // Actualizar la vista (mostrar la nueva calificación)
+  mostrarCalificaciones();
+
+  // Limpiar el formulario
+  this.reset();
+});
+
+// Al cargar la página, mostrar las calificaciones
+document.addEventListener("DOMContentLoaded", mostrarCalificaciones);
   });
 });
