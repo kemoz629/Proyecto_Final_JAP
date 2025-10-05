@@ -244,8 +244,44 @@ body {
 }
 
 /** Estilos para las tarjetas de reseñas - Inicio */
+
 .contenedorReviews {
-  background-color: #f8f9fa;
+  background: #f8f9fa;
+  transition: transform 0.2s, box-shadow 0.2s; /* Transición suave al hover */
+}
+
+.contenedorReviews:hover {
+  transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; /* Sombra más pronunciada */
+}
+
+/* Solo el párrafo de descripción tiene scroll */
+.contenedorReviews .review-description {
+  min-height: 4.5em; /* Altura mínima de aproximadamente 3 líneas */
+  max-height: 4.5em; /* Altura máxima de aproximadamente 3 líneas */
+  line-height: 1.5em; /* Altura de línea para calcular */
+  overflow-y: auto; /* Scroll vertical si el texto excede */
+  overflow-x: hidden; /* Sin scroll horizontal */
+  padding-right: 5px; /* Espacio para el scrollbar */
+}
+
+/* Estilo del scrollbar para que se vea más bonito */
+.contenedorReviews .review-description::-webkit-scrollbar {
+  width: 6px;
+}
+
+.contenedorReviews .review-description::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.contenedorReviews .review-description::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.contenedorReviews .review-description::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 h4 {
