@@ -4,37 +4,40 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Producto</title>
+  <title>eMercado - Información de producto</title>
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/productsstyle.css">
 </head>
 
 <body>
+  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <li class="nav-item dropdown" id="userDropdownContainerMobile" style="display:none;">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdownMobile" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <span class="colorUserMobile" id="userNameMobile"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <li><button class="dropdown-item" id="logoutBtnMobile">Cerrar sesión</button></li>
+        </ul>
+      </li>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
+          <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
           <li class="nav-item dropdown" id="userDropdownContainer" style="display:none;">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              <span id="userName"></span>
-            </a>
+              aria-expanded="false"><span id="userName"></span></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
               <li><button class="dropdown-item" id="logoutBtn">Cerrar sesión</button></li>
             </ul>
@@ -44,82 +47,58 @@
     </div>
   </nav>
 
-  <div class="product-container"> <!--Columna que contiene imágenes-->
-    <main class="container my-5">
-      <div class="row g-4 contenedor-info">  
-        <div class="col-md-5">
-          <div class="product-carousel">
-            <div id="product-images-carousel" class="carousel slide">
-              <div class="carousel-inner" id="carousel-images-container">
-                <!-- Botones para ir hacia adelante o atrás en las imágenes -->
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#product-images-carousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#product-images-carousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4"> <!-- Información del producto -->
-          <div class="product-info">
-            <h1 id="product-name" class="product-name">NOMBRE PRODUCTO</h1>
-            <hr class="linea-divisoria">
-            
-            <div class="info-subtitulos">Sobre este producto</div>
-            <p id="product-description" class="product-description"></p>
-            <hr class="linea-divisoria">
-            
-            <div class="info-subtitulos">Información adicional</div>
-            <ul class="product-info-list">
-              <li>
-                <span class="info-label">• Ventas totales:</span>
-                <span id="product-sold-count" class="info-value"></span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-3"> <!--Columna que contiene precio-->
-          <div class="contenedor-precios">
-            <div class="card p-3 info-precios">
-              <div class="card-body">
-                <h2 class="precio-monto" id="product-price"></h2>
-                <div class="promo"> <!--Tarjeta de promo-->
-                  <div class="promo-titulo">10% OFF EXTRA con cupón: JAP-2025</div>
-                  <div class="promo-subtitulo">¡Comprá en hasta 12 cuotas sin interés con todas tus tarjetas!</div>
-                </div>
-                <div class="action-buttons d-grid gap-2">
-                  <button class="btn boton-comprar" type="button">Comprar</button>
-                  <button class="btn boton-carrito" type="button">Agregar al carro</button>
-                </div>
-              </div>
-            </div>
-          </div>
+  <!-- MAIN -->
+  <main class="container my-4">
+    <div class="row g-3 justify-content-center">
+      <!-- IMAGEN PRINCIPAL Y MINIATURAS -->
+      <div class="col-lg-4 text-center">
+        <div class="p-3 shadow-sm bg-light rounded">
+          <img id="mainImg" class="img-fluid rounded mb-3" src="" alt="Imagen producto">
+          <div id="thumbnails" class="d-flex justify-content-center gap-2"></div>
         </div>
       </div>
-    </main>
-  </div>
 
-  <footer class="text-muted">
+      <!-- INFORMACIÓN PRINCIPAL DEL PRODUCTO -->
+      <div class="col-lg-4">
+        <div class="p-3 shadow-sm bg-light rounded infProd">
+          <h3 id="productName" class="text-center mb-1"></h3>
+          <hr>
+          <h5>Sobre este producto</h5>
+          <p id="productDescription" class="mb-4"></p>
+          <hr>
+          <h5>Información adicional</h5>
+          <p><strong>Ventas totales:</strong> <span id="soldCount"></span></p>
+        </div>
+      </div>
+
+      <!-- PRECIO Y BOTONES -->
+      <div class="col-lg-3">
+        <div class="p-3 shadow-sm bg-light rounded text-center">
+          <p id="productPrice" class="fs-4 fw-bold text-success"></p>
+          <div class="p-2 rounded mb-3" style="background-color: #d1d1d0;">
+            <strong>10% OFF EXTRA</strong><br>
+            con cupón: <span class="fw-bold">JAP-2025</span>
+            <p>¡Comprá en hasta 12 cuotas sin interés con todas tus tarjetas!</p>
+          </div>
+          <button class="btn btn-warning w-100 mb-2 btnProductInfo">Comprar</button>
+          <button class="btn btn-outline-warning w-100 btnProductInfo">Agregar al carro</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="text-muted mt-5">
     <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
+      <p class="float-end"><a href="#">Volver arriba</a></p>
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
 
+  <!-- SPINNER -->
   <div id="spinner-wrapper">
     <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div></div><div></div><div></div><div></div>
     </div>
   </div>
 
@@ -127,5 +106,4 @@
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
 </body>
-
 </html>
