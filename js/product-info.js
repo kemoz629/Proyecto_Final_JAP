@@ -34,9 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // Cargar calificaciones
       loadReviews(productID);
 
-      // Cargar productos relacionados
-      loadRelatedProducts(product.relatedProducts);
-
       // PRODUCTOS RELACIONADOS 
       if (product.relatedProducts && product.relatedProducts.length > 0) {
         const contenedorRelacionados = document.getElementById("productosRelacionados");
@@ -166,25 +163,3 @@ function addReview(rating, comment) {
   // Recargar calificaciones para mostrar la nueva
   loadReviews(idProducto);
 }
-
-// Función para cargar productos relacionados
-function loadRelatedProducts(relatedProducts) {
-  const relatedContainer = document.getElementById("relatedProducts");
-  relatedContainer.innerHTML = "";
-  relatedProducts.forEach(product => {
-    // Propiedades en product: id, name, image
-    const productDiv = document.createElement("div");
-    productDiv.className = "col-md-3";
-    productDiv.innerHTML = `
-      <div class="card p-2 rounded cursor-active" onclick="localStorage.setItem('productID', ${product.id}); location.reload();">
-        <img src="${product.image}" class="rounded" alt="${product.name}">
-        <div class="card-body text-center">
-          <h6 class="card-title">${product.name}</h6>
-        </div>
-      </div>
-    `;
-    relatedContainer.appendChild(productDiv);
-  });
-}
-
-});
