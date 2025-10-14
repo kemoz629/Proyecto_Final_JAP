@@ -14,6 +14,9 @@
 </head>
 
 <body>
+  <!-- Elemento invisible para evitar scroll automático al foco -->
+  <input type="text" style="position: absolute; left: -10000px; top: -10000px;" autofocus>
+
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
@@ -53,7 +56,10 @@
       <!-- IMAGEN PRINCIPAL Y MINIATURAS -->
       <div class="col-lg-4 text-center">
         <div class="p-3 shadow-sm bg-light rounded">
-          <img id="mainImg" class="img-fluid rounded mb-3" src="" alt="Imagen producto">
+          <div class="image-container">
+            <div class="image-spinner" id="imageSpinner"></div>
+            <img id="mainImg" class="img-fluid rounded mb-3" src="" alt="Imagen producto" style="display: none;" onload="showImage()">
+          </div>
           <div id="thumbnails" class="d-flex justify-content-center gap-2"></div>
         </div>
       </div>
@@ -80,8 +86,8 @@
             con cupón: <span class="fw-bold">JAP-2025</span>
             <p>¡Comprá en hasta 12 cuotas sin interés con todas tus tarjetas!</p>
           </div>
-          <button class="btn btn-warning w-100 mb-2 btnProductInfo">Comprar</button>
-          <button class="btn btn-outline-warning w-100 btnProductInfo">Agregar al carro</button>
+          <button class="btn btnCustom btn-warning w-100 mb-2 btnProductInfo">Comprar</button>
+          <button class="btn btnCustom btn-outline-warning w-100 btnProductInfo">Agregar al carro</button>
         </div>
       </div>
     </div>
@@ -96,6 +102,47 @@
 
 
   </main>
+
+  <!-- SECCIÓN DE CALIFICACIONES -->
+  <section class="container my-4">
+    <h4>Calificaciones de usuarios</h4>
+    <div id="reviews" class="row g-3">
+      <!-- Las calificaciones se cargarán aquí dinámicamente -->
+    </div>
+  </section>
+
+  <!-- FORMULARIO PARA CALIFICAR -->
+  <section class="container my-4">
+    <h4>Deja tu calificación</h4>
+    <form id="reviewForm" class="p-3 shadow-sm bg-light rounded">
+      <div class="mb-3">
+        <label for="rating" class="form-label">Calificación (1-5 estrellas):</label>
+        <select id="rating" class="form-select" required>
+          <option value="">Selecciona una calificación</option>
+          <option value="1">1 estrella</option>
+          <option value="2">2 estrellas</option>
+          <option value="3">3 estrellas</option>
+          <option value="4">4 estrellas</option>
+          <option value="5">5 estrellas</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="comment" class="form-label">Comentario:</label>
+        <textarea id="comment" class="form-control border" rows="3" placeholder="Escribe tu comentario aquí..." required></textarea>
+      </div>
+      <div class="w-100 text-end">
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- SECCIÓN DE PRODUCTOS RELACIONADOS -->
+  <section class="container my-4">
+    <h4>Productos relacionados</h4>
+    <div id="relatedProducts" class="row g-3">
+      <!-- Los productos relacionados se cargarán aquí dinámicamente -->
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer class="text-muted mt-5">
