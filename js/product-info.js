@@ -42,8 +42,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Manejar envío del formulario de calificación
   document.getElementById("reviewForm").addEventListener("submit", function (e) {
     e.preventDefault();
-    const rating = document.getElementById("rating").value;
+    const rating = document.querySelector('input[name="rating"]:checked')?.value;
     const comment = document.getElementById("comment").value;
+
+    if (!rating) {
+      alert("Por favor selecciona una calificación");
+      return;
+    }
+
     // Simulación: agregar la calificación (en un proyecto real, enviar a servidor)
     addReview(rating, comment);
     // Limpiar formulario
