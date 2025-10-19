@@ -103,6 +103,14 @@
         </div>
       </div>
     </div>
+
+    <!-- PRODUCTOS RELACIONADOS -->
+    <div class="mt-5" id="seccionRelacionados">
+      <h3 class="mb-3">PRODUCTOS RELACIONADOS</h3>
+      <div class="row" id="productosRelacionados">
+      </div>
+    </div>
+    
   </main>
 
   <!-- SECCIÓN DE CALIFICACIONES -->
@@ -117,16 +125,15 @@
   <section class="container my-4">
     <h4>Deja tu calificación</h4>
     <form id="reviewForm" class="p-3 shadow-sm bg-light rounded">
-      <div class="mb-3">
+      <div class="mb-3 d-flex flex-column">
         <label for="rating" class="form-label">Calificación (1-5 estrellas):</label>
-        <select id="rating" class="form-select" required>
-          <option value="">Selecciona una calificación</option>
-          <option value="1">1 estrella</option>
-          <option value="2">2 estrellas</option>
-          <option value="3">3 estrellas</option>
-          <option value="4">4 estrellas</option>
-          <option value="5">5 estrellas</option>
-        </select>
+        <div class="star-rating" style="justify-content: left;">
+          <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+          <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+          <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+          <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+          <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+        </div>
       </div>
       <div class="mb-3">
         <label for="comment" class="form-label">Comentario:</label>
@@ -138,12 +145,6 @@
     </form>
   </section>
 
-  <!-- SECCIÓN DE PRODUCTOS RELACIONADOS -->
-  <section class="container my-4">
-    <h4>Productos relacionados</h4>
-    <div id="relatedProducts" class="row g-3">
-      <!-- Los productos relacionados se cargarán aquí dinámicamente -->
-    </div>
   </section>
 
   <!-- FOOTER -->
