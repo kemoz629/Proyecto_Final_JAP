@@ -1,0 +1,70 @@
+/* Variables de fondo según tema */
+:root {
+    --bg-profile-image: url("../img/modoClaro.png");
+}
+
+[data-bs-theme="light"] {
+    --bg-profile-image: url("../img/modoClaro.png");
+}
+
+[data-bs-theme="dark"] {
+    --bg-profile-image: url("../img/productsBackground.jpg");
+}
+
+body {
+    background-image: var(--bg-profile-image);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* Card de perfil - se adapta al tema */
+[data-bs-theme="light"] .cardProfile {
+    background: rgba(255, 255, 255, 0.90);
+    color: #212529;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    border-radius: 16px;
+}
+
+[data-bs-theme="dark"] .cardProfile {
+    background: rgba(45, 45, 45, 0.90);
+    color: #e9ecef;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+}
+
+/* Labels y textos en modo oscuro */
+[data-bs-theme="dark"] .cardProfile label,
+[data-bs-theme="dark"] .cardProfile h2,
+[data-bs-theme="dark"] .cardProfile p {
+    color: #e9ecef;
+}
+
+/* Inputs en modo oscuro */
+[data-bs-theme="dark"] .cardProfile .form-control {
+    background-color: rgba(30, 30, 30, 0.7);
+    border-color: #495057;
+    color: #e9ecef;
+}
+
+[data-bs-theme="dark"] .cardProfile .form-control:focus {
+    background-color: rgba(30, 30, 30, 0.9);
+    border-color: #0d6efd;
+    color: #e9ecef;
+}
+
+/* Placeholder text en modo oscuro */
+[data-bs-theme="dark"] .cardProfile .form-control::placeholder {
+    color: #adb5bd;
+}
+
+/* Drop zone en modo oscuro */
+[data-bs-theme="dark"] #drop-zone {
+    border-color: #6c757d !important;
+}
+
+[data-bs-theme="dark"] #placeholder p,
+[data-bs-theme="dark"] #placeholder i {
+    color: #adb5bd !important;
+}

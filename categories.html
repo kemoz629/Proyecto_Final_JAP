@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" >
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,7 +12,7 @@
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="categories-page">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -23,6 +23,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="userDropdownMobile" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
           <span class="colorUserMobile" id="userNameMobile"></span>
+          <img id="navbarProfileImgMobile" class="navbar-profile-img d-inline-block align-middle" src="img/img_perfil.png" alt="Perfil" style="display:none;">
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
           <li><button class="dropdown-item" id="logoutBtnMobile">Cerrar sesión</button></li>
@@ -30,6 +31,11 @@
       </li>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <button class="btn theme-toggle-btn" onclick="toggleTheme()">
+              <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="index.html">Inicio</a>
           </li>
@@ -39,10 +45,14 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="my-profile.html">Perfil</a>
+          </li>
           <li class="nav-item dropdown" id="userDropdownContainer" style="display:none;">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               <span id="userName"></span>
+              <img id="navbarProfileImg" class="navbar-profile-img d-inline-block align-middle" src="img/img_perfil.png" alt="Perfil" style="display:none;">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
               <li><button class="dropdown-item" id="logoutBtn">Cerrar sesión</button></li>

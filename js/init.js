@@ -41,6 +41,7 @@ let getJSONData = function(url){
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  applySavedTheme()
   let usuario = localStorage.getItem("usuarioLogueado");
   if (usuario) {
   let userDropdownContainer = document.documentElement.clientWidth > 768 ? document.getElementById("userDropdownContainer") : document.getElementById("userDropdownContainerMobile");
@@ -53,8 +54,63 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "login.html";
     });
   }
+
+  // Imagen de perfil en navbar
+  const savedImage = localStorage.getItem('miPerfil.profileImage.dataURL');
+  if (savedImage) {
+    let navbarImg = document.getElementById("navbarProfileImg");
+    if(navbarImg) {
+      navbarImg.src = savedImage;
+      navbarImg.style.display = "inline-block";
+    }
+    let navbarImgMobile = document.getElementById("navbarProfileImgMobile");
+    if(navbarImgMobile) {
+      navbarImgMobile.src = savedImage;
+      navbarImgMobile.style.display = "inline-block";
+    }
+  } else {
+    let navbarImg = document.getElementById("navbarProfileImg");
+    if(navbarImg) navbarImg.style.display = "inline-block";
+    let navbarImgMobile = document.getElementById("navbarProfileImgMobile");
+    if(navbarImgMobile) navbarImgMobile.style.display = "inline-block";
+  }
 });
 
 if (!localStorage.getItem('usuarioLogueado')) {
     window.location.href = 'login.html';
 }
+
+
+function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-bs-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    // Cambiar el atributo data-bs-theme
+    html.setAttribute('data-bs-theme', newTheme);
+
+    // Actualizar el ícono
+    const icon = document.getElementById('theme-icon');
+    if (newTheme === 'dark') {
+        icon.className = 'fas fa-sun';
+    } else {
+        icon.className = 'fas fa-moon';
+    }
+    
+    // Guardar en localStorage (para persistencia)
+    localStorage.setItem('theme', newTheme);
+}
+
+function applySavedTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const html = document.documentElement;
+    html.setAttribute('data-bs-theme', savedTheme);
+
+    const icon = document.getElementById('theme-icon');
+    if (icon) {
+        icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+}
+
+// Ejecutar al cargar el DOM
+document.addEventListener('DOMContentLoaded', applySavedTheme);

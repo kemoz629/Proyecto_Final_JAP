@@ -1,5 +1,21 @@
+:root {
+    --bg-image: url("../img/modoClaro.png");
+}
+
+
+[data-bs-theme="light"] {
+    --bg-image: url("../img/modoClaro.png");
+    --text-primary: #212529;
+}
+
+
+[data-bs-theme="dark"] {
+    --bg-image: url("../img/productsBackground.jpg");
+    --text-primary: #e9ecef;
+}
+
 body {
-  background-image: url("../img/productsBackground.jpg"); /* Reemplazá con tu imagen */
+  background-image: var(--bg-image);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -21,32 +37,131 @@ body {
 }
 
 .btnCustom {
-  background: rgba(255, 255, 255, 0.15); /* Blanco translúcido */
-  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Modo claro: botones con mejor contraste */
+[data-bs-theme="light"] .btnCustom {
+  background: rgba(50, 50, 50, 0.75);
+  color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+[data-bs-theme="light"] .btnCustom:hover {
+  background: rgba(30, 30, 30, 0.85);
+  color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Modo oscuro: mantener estilo translúcido */
+[data-bs-theme="dark"] .btnCustom {
+  background: rgba(255, 255, 255, 0.15);
   color: gainsboro;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+[data-bs-theme="dark"] .btnCustom:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Cuando el botón está activo/seleccionado */
+[data-bs-theme="light"] .btnCustom.active,
+[data-bs-theme="light"] .btnCustom:active {
+  background: rgba(13, 110, 253, 0.85) !important;
+  color: white !important;
+  border-color: rgba(13, 110, 253, 1) !important;
+}
+
+[data-bs-theme="dark"] .btnCustom.active,
+[data-bs-theme="dark"] .btnCustom:active {
+  background: rgba(13, 110, 253, 0.6) !important;
+  color: white !important;
+  border-color: rgba(13, 110, 253, 0.8) !important;
 }
 
 .form-controlCustom {
-  background: rgba(255, 255, 255, 0.15); /* Blanco translúcido */
-  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: .375rem !important;
+  transition: all 0.3s ease;
+}
+
+/* Modo claro */
+[data-bs-theme="light"] .form-controlCustom {
+  background: rgba(255, 255, 255, 0.85);
+  color: #212529;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+[data-bs-theme="light"] .form-controlCustom:focus {
+  background: rgba(255, 255, 255, 0.95);
+  color: #212529;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+[data-bs-theme="light"] .form-controlCustom::placeholder {
+  color: #6c757d;
+}
+
+/* Modo oscuro */
+[data-bs-theme="dark"] .form-controlCustom {
+  background: rgba(255, 255, 255, 0.15);
+  color: gainsboro;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+[data-bs-theme="dark"] .form-controlCustom:focus {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.15);
+}
+
+[data-bs-theme="dark"] .form-controlCustom::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .box-transparente {
-  background: rgba(255, 255, 255, 0.15); /* Blanco translúcido */
-  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 30px;
   margin-top: 6%;
 }
 
+[data-bs-theme="light"] .box-transparente {
+  background: rgba(255, 255, 255, 0.85);
+  color: #212529;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="dark"] .box-transparente {
+  background: rgba(255, 255, 255, 0.15);
+  color: #e9ecef;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
 .lead {
-  color: black;
+  font-weight: 500;
+}
+
+[data-bs-theme="light"] .lead {
+  color: #212529;
+}
+
+[data-bs-theme="dark"] .lead {
+  color: #e9ecef;
 }
 
 /* Spinner para imagen */
@@ -96,20 +211,35 @@ body {
 #seccionRelacionados h3 {
   font-weight: 600;
   letter-spacing: 2px;
-  color: #fff;
   text-transform: uppercase;
   font-size: 1.5rem;
 }
 
+[data-bs-theme="light"] #seccionRelacionados h3 {
+  color: #212529;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="dark"] #seccionRelacionados h3 {
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
 #seccionRelacionados hr {
-  border-color: rgba(255, 255, 255, 0.3);
   margin-bottom: 1.5rem;
+}
+
+[data-bs-theme="light"] #seccionRelacionados hr {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+[data-bs-theme="dark"] #seccionRelacionados hr {
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Tarjeta de producto relacionado */
 .card-relacionado {
   height: 100%;
-  background-color: #fff;
   border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -117,15 +247,32 @@ body {
   margin: 0 auto;
 }
 
+[data-bs-theme="light"] .card-relacionado {
+  background-color: #fff;
+}
+
+[data-bs-theme="dark"] .card-relacionado {
+  background-color: rgba(45, 45, 45, 0.85);
+  color: #e9ecef;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
 /* Contenedor de imagen */
 .img-relacionado {
   height: 12rem;
   overflow: hidden;
-  background-color: #f8f9fa;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.7rem;
+}
+
+[data-bs-theme="light"] .img-relacionado {
+  background-color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .img-relacionado {
+  background-color: rgba(30, 30, 30, 0.5);
 }
 
 .img-relacionado img {
@@ -138,13 +285,13 @@ body {
 .body-relacionado {
   padding: 12px 15px;
   text-align: center;
-  background-color: #fff;
+  background-color: var(--);
 }
 
 .titulo-relacionado {
   font-size: 1rem;
   font-weight: 500;
-  color: #333;
+  color: var(--text-primary);
   margin: 0;
   line-height: 1.3;
 }
@@ -343,13 +490,30 @@ body {
 /** Estilos para las tarjetas de reseñas - Inicio */
 
 .contenedorReviews {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+[data-bs-theme="light"] .contenedorReviews {
   background: #f8f9fa;
-  transition: transform 0.2s, box-shadow 0.2s; /* Transición suave al hover */
+  color: #212529;
+}
+
+[data-bs-theme="dark"] .contenedorReviews {
+  background: rgba(45, 45, 45, 0.85);
+  color: #e9ecef;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .contenedorReviews:hover {
-  transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; /* Sombra más pronunciada */
+  transform: translateY(-5px);
+}
+
+[data-bs-theme="light"] .contenedorReviews:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-bs-theme="dark"] .contenedorReviews:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
 }
 
 /* Solo el párrafo de descripción tiene scroll */
@@ -363,36 +527,60 @@ body {
 }
 
 /* Estilo del scrollbar para que se vea más bonito */
-.contenedorReviews .review-description::-webkit-scrollbar {
+[data-bs-theme="light"] .contenedorReviews .review-description::-webkit-scrollbar {
   width: 6px;
 }
 
-.contenedorReviews .review-description::-webkit-scrollbar-track {
+[data-bs-theme="light"] .contenedorReviews .review-description::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
 }
 
-.contenedorReviews .review-description::-webkit-scrollbar-thumb {
+[data-bs-theme="light"] .contenedorReviews .review-description::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
 }
 
-.contenedorReviews .review-description::-webkit-scrollbar-thumb:hover {
+[data-bs-theme="light"] .contenedorReviews .review-description::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+[data-bs-theme="dark"] .contenedorReviews .review-description::-webkit-scrollbar {
+  width: 6px;
+}
+
+[data-bs-theme="dark"] .contenedorReviews .review-description::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+[data-bs-theme="dark"] .contenedorReviews .review-description::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+[data-bs-theme="dark"] .contenedorReviews .review-description::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 h4 {
   font-family: 'Arial', sans-serif;
   font-size: 1.6rem;
   font-weight: 700;
-  color: #fff; /* blanco para resaltar sobre el fondo oscuro */
   letter-spacing: 1px;
   text-transform: uppercase;
-
-  /* sombra muy suave para que no se pierda en fondos claros */
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-
   margin-bottom: 1rem;
+}
+
+[data-bs-theme="light"] h4 {
+  color: #212529;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="dark"] h4 {
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /** Estilos para las tarjetas de reseñas - Fin */
