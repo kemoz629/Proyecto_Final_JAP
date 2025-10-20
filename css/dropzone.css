@@ -427,3 +427,70 @@ margin-bottom: 10px;}
 #file-upload .dz-preview.dz-error .dz-error-message, #file-upload .dz-preview.dz-error .dz-error-mark{
   display: none;
 }
+
+/* Estilos para modo oscuro */
+[data-bs-theme="dark"] .dropzone {
+  background: rgba(45, 45, 45, 0.85);
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .dropzone .dz-message {
+  color: #e9ecef;
+}
+
+[data-bs-theme="dark"] #file-upload {
+  background: rgba(45, 45, 45, 0.85);
+  border: 2px dashed #6c757d;
+}
+
+[data-bs-theme="dark"] #file-upload .dz-message {
+  color: #e9ecef;
+}
+
+[data-bs-theme="dark"] #file-upload:hover {
+  border-color: #adb5bd;
+  background: rgba(55, 55, 55, 0.85);
+}
+
+[data-bs-theme="dark"] #file-upload .dz-preview {
+  background: rgba(30, 30, 30, 0.7);
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] #file-upload .dz-preview .dz-image {
+  background: rgba(20, 20, 20, 0.5);
+}
+
+[data-bs-theme="dark"] #file-upload .dz-preview .dz-details {
+  background: rgba(40, 40, 40, 0.85);
+  color: #e9ecef;
+}
+
+[data-bs-theme="dark"] #file-upload .dz-preview .dz-filename span,
+[data-bs-theme="dark"] #file-upload .dz-preview .dz-size span {
+  background: rgba(45, 45, 45, 0.9);
+  color: #e9ecef;
+  border: 1px solid #495057;
+}
+
+[data-bs-theme="dark"] #file-upload .dz-preview .dz-progress {
+  border-color: #6c757d;
+}
+
+[data-bs-theme="dark"] #file-upload .dz-preview .dz-progress .dz-upload {
+  background: #0d6efd;
+}
+
+[data-bs-theme="dark"] #file-upload .dz-preview:hover .dz-details {
+  opacity: 1;
+}
+
+/* Modo claro - mantener estilos originales */
+[data-bs-theme="light"] #file-upload {
+  background: white;
+  border: 2px dashed #0087f7;
+}
+
+[data-bs-theme="light"] #file-upload:hover {
+  background: #f8f9fa;
+}
