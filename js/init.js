@@ -53,10 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "login.html";
     });
   }
-});
 
-// Imagen de perfil en navbar
-  const savedImage = localStorage.getItem('profileImage');
+  // Imagen de perfil en navbar
+  const savedImage = localStorage.getItem('miPerfil.profileImage.dataURL');
   if (savedImage) {
     let navbarImg = document.getElementById("navbarProfileImg");
     if(navbarImg) {
@@ -74,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let navbarImgMobile = document.getElementById("navbarProfileImgMobile");
     if(navbarImgMobile) navbarImgMobile.style.display = "inline-block";
   }
+});
 
 if (!localStorage.getItem('usuarioLogueado')) {
     window.location.href = 'login.html';

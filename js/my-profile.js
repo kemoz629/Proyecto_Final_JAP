@@ -84,6 +84,7 @@
     profileImg.src = dataURL;
     profileImg.style.display = 'block';
     placeholder.style.display = 'none';
+    placeholder.classList.remove('d-flex');
   }
 
   function showImageFromBlob(blob) {
@@ -92,12 +93,14 @@
     profileImg.onload = () => URL.revokeObjectURL(url);
     profileImg.style.display = 'block';
     placeholder.style.display = 'none';
+    placeholder.classList.remove('d-flex');
   }
 
   function hideImage() {
     profileImg.src = '';
     profileImg.style.display = 'none';
-    placeholder.style.display = 'block';
+    placeholder.style.display = 'flex';
+    placeholder.classList.add('d-flex');
   }
 
   function dataURLToBlob(dataURL) {
@@ -208,5 +211,61 @@
 
   // Inicializar
   loadSavedImage();
+
+  // --- Precargar datos del formulario ---
+  function loadFormData() {
+    // Cargar email desde usuarioLogueado
+    const emailInput = document.getElementById('email');
+    const usuario = localStorage.getItem('usuarioLogueado');
+    if (usuario && emailInput) {
+      emailInput.value = usuario;
+    }
+
+    // Cargar otros datos desde profileData
+    const profileData = localStorage.getItem('profileData');
+    if (profileData) {
+      try {
+        const data = JSON.parse(profileData);
+        const firstNameInput = document.getElementById('firstName');
+        const lastNameInput = document.getElementById('lastName');
+        const phoneInput = document.getElementById('phone');
+
+        if (data.firstName && firstNameInput) firstNameInput.value = data.firstName;
+        if (data.lastName && lastNameInput) lastNameInput.value = data.lastName;
+        if (data.phone && phoneInput) phoneInput.value = data.phone;
+      } catch (e) {
+        console.warn('Error al parsear profileData:', e);
+      }
+    }
+  }
+
+  // Guardar datos del formulario cuando se modifiquen
+  function saveFormData() {
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const phoneInput = document.getElementById('phone');
+
+    if (firstNameInput && lastNameInput && phoneInput) {
+      const profileData = {
+        firstName: firstNameInput.value,
+        lastName: lastNameInput.value,
+        phone: phoneInput.value
+      };
+      localStorage.setItem('profileData', JSON.stringify(profileData));
+    }
+  }
+
+  // Llamar a loadFormData al iniciar
+  loadFormData();
+
+  // Agregar event listeners para guardar cambios automáticamente
+  const form = document.querySelector('form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      saveFormData();
+      alert('Perfil guardado exitosamente');
+    });
+  }
 
 })();
