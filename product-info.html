@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" >
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -35,6 +35,11 @@
       </li>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <button class="btn btn-primary" onclick="toggleTheme()">
+              <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+          </li>
           <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
           <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
           <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
@@ -55,8 +60,8 @@
     <div class="row g-3 justify-content-center">
       <!-- IMAGEN PRINCIPAL Y MINIATURAS -->
       <div class="col-lg-4 text-center">
-        <div class="p-3 shadow-sm bg-light rounded">
-          <div class="image-container">
+        <div class="p-3 shadow-sm bg-custom rounded">
+          <div class="image-container bg-custom">
             <div class="image-spinner" id="imageSpinner"></div>
             <img id="mainImg" class="img-fluid rounded mb-3" src="" alt="Imagen producto" style="display: none;" onload="showImage()">
           </div>
@@ -66,7 +71,7 @@
 
       <!-- INFORMACIÓN PRINCIPAL DEL PRODUCTO -->
       <div class="col-lg-4">
-        <div class="p-3 shadow-sm bg-light rounded infProd">
+        <div class="p-3 shadow-sm bg-custom rounded infProd">
           <h3 id="productName" class="text-center mb-1"></h3>
           <hr>
           <h5>Sobre este producto</h5>
@@ -79,7 +84,7 @@
 
       <!-- PRECIO Y BOTONES -->
       <div class="col-lg-3">
-        <div class="p-3 shadow-sm bg-light rounded text-center">
+        <div class="p-3 shadow-sm bg-custom rounded text-center">
           <p id="productPrice" class="fs-4 fw-bold text-success"></p>
           <div class="p-2 rounded mb-3" style="background-color: #d1d1d0;">
             <strong>10% OFF EXTRA</strong><br>
@@ -112,7 +117,7 @@
   <!-- FORMULARIO PARA CALIFICAR -->
   <section class="container my-4">
     <h4>Deja tu calificación</h4>
-    <form id="reviewForm" class="p-3 shadow-sm bg-light rounded">
+    <form id="reviewForm" class="p-3 shadow-sm bg-custom rounded">
       <div class="mb-3 d-flex flex-column">
         <label for="rating" class="form-label">Calificación (1-5 estrellas):</label>
         <div class="star-rating" style="justify-content: left;">

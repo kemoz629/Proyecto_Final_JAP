@@ -1,5 +1,21 @@
+:root {
+    --bg-image: url("../img/modoClaro.png");
+}
+
+
+[data-bs-theme="light"] {
+    --bg-image: url("../img/modoClaro.png");
+    --text-primary: #212529;
+}
+
+
+[data-bs-theme="dark"] {
+    --bg-image: url("../img/productsBackground.jpg");
+    --text-primary: #e9ecef;
+}
+
 body {
-  background-image: url("../img/productsBackground.jpg"); /* Reemplazá con tu imagen */
+  background-image: var(--bg-image);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -138,13 +154,13 @@ body {
 .body-relacionado {
   padding: 12px 15px;
   text-align: center;
-  background-color: #fff;
+  background-color: var(--);
 }
 
 .titulo-relacionado {
   font-size: 1rem;
   font-weight: 500;
-  color: #333;
+  color: var(--text-primary);
   margin: 0;
   line-height: 1.3;
 }

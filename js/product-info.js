@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       product.images.forEach((img, index) => {
         let thumb = document.createElement("img");
         thumb.src = img;
-        thumb.className = "img-thumbnail";
+        thumb.className = "img-thumbnail bg-custom";
         thumb.style.cursor = "pointer";
         thumb.style.width = "60px";
         thumb.onclick = () => mainImg.src = img;
@@ -44,11 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
           tarjeta.className = "col-lg-3 col-md-4 col-sm-6 mb-4";
           
           tarjeta.innerHTML = `
-            <div class="card-relacionado">
-              <div class="img-relacionado">
+            <div class="card-relacionado bg-custom">
+              <div class="img-relacionado bg-custom">
                 <img src="${relacionado.image}" alt="${relacionado.name}">
               </div>
-              <div class="body-relacionado">
+              <div class="body-relacionado bg-custom">
                 <h6 class="titulo-relacionado">${relacionado.name}</h6>
               </div>
             </div>
@@ -118,7 +118,7 @@ function loadReviews(productID) {
         const reviewDiv = document.createElement("div");
         reviewDiv.className = "col-md-6";
         reviewDiv.innerHTML = `
-          <div class="p-3 border border-secondary rounded shadow-sm contenedorReviews">
+          <div class="p-3 border border-secondary bg-custom rounded shadow-sm contenedorReviews">
             <h6 class="mb-2"><i class="fas fa-user-circle me-2"></i>${review.user}</h6>
             <p class="text-muted small mb-2"><i class="far fa-calendar me-2"></i>${review.dateTime}</p>
             <p class="review-description mb-2">${review.description}</p>
