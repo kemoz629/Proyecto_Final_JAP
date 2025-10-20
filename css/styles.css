@@ -232,3 +232,14 @@ a.custom-card:hover {
     font-size: xxx-large;
   }
 }
+
+/* Estilos para imagen de perfil en navbar */
+.navbar-profile-img {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  margin-left: 8px;
+  background: #eee;
+}
