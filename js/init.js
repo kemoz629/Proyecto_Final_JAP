@@ -124,19 +124,6 @@ function applySavedTheme() {
   }
 }
 
-// --- Función para verificar carrito ---
-function verificarCarrito() {
-  const contenedorCarrito = document.getElementById("cart-container");
-  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-  if (carrito.length === 0) {
-    contenedorCarrito.innerHTML = `
-      <div class="text-center py-5">
-        <h4>No hay productos en el carrito 🛒</h4>
-        <p>Agrega productos desde la sección de productos para verlos aquí.</p>
-      </div>
-    `;
-  } else {
-    mostrarCarrito(carrito);
-  }
-}
+// Ejecutar al cargar el DOM
+document.addEventListener('DOMContentLoaded', applySavedTheme);
