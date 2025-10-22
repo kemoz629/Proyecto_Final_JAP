@@ -16,39 +16,51 @@ let hideSpinner = function(){
 }
 
 let getJSONData = function(url){
-    let result = {};
-    showSpinner();
-    return fetch(url)
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }else{
-        throw Error(response.statusText);
-      }
-    })
-    .then(function(response) {
-          result.status = 'ok';
-          result.data = response;
-          hideSpinner();
-          return result;
-    })
-    .catch(function(error) {
-        result.status = 'error';
-        result.data = error;
-        hideSpinner();
-        return result;
-    });
+  let result = {};
+  showSpinner();
+  return fetch(url)
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw Error(response.statusText);
+    }
+  })
+  .then(function(response) {
+    result.status = 'ok';
+    result.data = response;
+    hideSpinner();
+    return result;
+  })
+  .catch(function(error) {
+    result.status = 'error';
+    result.data = error;
+    hideSpinner();
+    return result;
+  });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  applySavedTheme()
+  applySavedTheme();
+
+  // Mostrar usuario logueado
   let usuario = localStorage.getItem("usuarioLogueado");
   if (usuario) {
-  let userDropdownContainer = document.documentElement.clientWidth > 768 ? document.getElementById("userDropdownContainer") : document.getElementById("userDropdownContainerMobile");
-  let userName = document.documentElement.clientWidth > 768 ? document.getElementById("userName") : document.getElementById("userNameMobile");
+    let userDropdownContainer = document.documentElement.clientWidth > 768 ?
+      document.getElementById("userDropdownContainer") :
+      document.getElementById("userDropdownContainerMobile");
+
+    let userName = document.documentElement.clientWidth > 768 ?
+      document.getElementById("userName") :
+      document.getElementById("userNameMobile");
+
     userDropdownContainer.style.display = "block";
     userName.textContent = usuario;
-    let logoutBtn = document.documentElement.clientWidth > 768 ? document.getElementById("logoutBtn") : document.getElementById("logoutBtnMobile");
+
+    let logoutBtn = document.documentElement.clientWidth > 768 ?
+      document.getElementById("logoutBtn") :
+      document.getElementById("logoutBtnMobile");
+
     logoutBtn.addEventListener("click", function () {
       localStorage.removeItem("usuarioLogueado");
       window.location.href = "login.html";
@@ -74,43 +86,57 @@ document.addEventListener("DOMContentLoaded", function () {
     let navbarImgMobile = document.getElementById("navbarProfileImgMobile");
     if(navbarImgMobile) navbarImgMobile.style.display = "inline-block";
   }
+
+  // --- Verificar contenido del carrito si estamos en cart.html ---
+  if (window.location.pathname.includes("cart.html")) {
+    verificarCarrito();
+  }
 });
 
 if (!localStorage.getItem('usuarioLogueado')) {
-    window.location.href = 'login.html';
+  window.location.href = 'login.html';
 }
 
-
 function toggleTheme() {
-    const html = document.documentElement;
-    const currentTheme = html.getAttribute('data-bs-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-bs-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-bs-theme', newTheme);
 
-    // Cambiar el atributo data-bs-theme
-    html.setAttribute('data-bs-theme', newTheme);
+  const icon = document.getElementById('theme-icon');
+  if (newTheme === 'dark') {
+    icon.className = 'fas fa-sun';
+  } else {
+    icon.className = 'fas fa-moon';
+  }
 
-    // Actualizar el ícono
-    const icon = document.getElementById('theme-icon');
-    if (newTheme === 'dark') {
-        icon.className = 'fas fa-sun';
-    } else {
-        icon.className = 'fas fa-moon';
-    }
-    
-    // Guardar en localStorage (para persistencia)
-    localStorage.setItem('theme', newTheme);
+  localStorage.setItem('theme', newTheme);
 }
 
 function applySavedTheme() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    const html = document.documentElement;
-    html.setAttribute('data-bs-theme', savedTheme);
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  const html = document.documentElement;
+  html.setAttribute('data-bs-theme', savedTheme);
 
-    const icon = document.getElementById('theme-icon');
-    if (icon) {
-        icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-    }
+  const icon = document.getElementById('theme-icon');
+  if (icon) {
+    icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+  }
 }
 
-// Ejecutar al cargar el DOM
-document.addEventListener('DOMContentLoaded', applySavedTheme);
+// --- Función para verificar carrito ---
+function verificarCarrito() {
+  const contenedorCarrito = document.getElementById("cart-container");
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  if (carrito.length === 0) {
+    contenedorCarrito.innerHTML = `
+      <div class="text-center py-5">
+        <h4>No hay productos en el carrito 🛒</h4>
+        <p>Agrega productos desde la sección de productos para verlos aquí.</p>
+      </div>
+    `;
+  } else {
+    mostrarCarrito(carrito);
+  }
+}

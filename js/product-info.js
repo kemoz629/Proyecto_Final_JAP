@@ -169,3 +169,73 @@ function addReview(rating, comment) {
   // Recargar calificaciones para mostrar la nueva
   loadReviews(idProducto);
 }
+
+// --- FUNCIONALIDAD DE CARRITO --- //
+document.addEventListener("DOMContentLoaded", () => {
+  // Esperar a que se cargue el producto desde el getJSONData
+  // Para eso, observamos los botones después de que el producto haya sido renderizado
+  const observer = new MutationObserver(() => {
+    const btnComprar = document.querySelector(".btn-warning.btnProductInfo");
+    const btnAgregar = document.querySelector(".btn-outline-warning.btnProductInfo");
+
+    // Si todavía no existen los botones, esperamos
+    if (!btnComprar || !btnAgregar) return;
+
+    // Una vez detectados, desconectamos el observer
+    observer.disconnect();
+
+    // Recuperamos el producto actual (ya cargado por tu getJSONData)
+    const productID = localStorage.getItem("productID") || 50921;
+
+    getJSONData(PRODUCT_INFO_URL + productID + EXT_TYPE).then(resultObj => {
+      if (resultObj.status === "ok") {
+        const product = resultObj.data;
+
+        const item = {
+          id: product.id,
+          name: product.name,
+          cost: product.cost,
+          currency: product.currency,
+          image: product.images[0],
+          quantity: 1
+        };
+
+        // Funciones auxiliares
+        const getCart = () => JSON.parse(localStorage.getItem("cart")) || [];
+        const saveCart = cart => localStorage.setItem("cart", JSON.stringify(cart));
+
+        const addToCart = product => {
+          const cart = getCart();
+          const existing = cart.find(item => item.id === product.id);
+
+          if (existing) {
+            existing.quantity += 1;
+          } else {
+            cart.push(product);
+          }
+          saveCart(cart);
+        };
+
+        // Botón "Comprar": agrega y redirige
+        btnComprar.addEventListener("click", () => {
+          addToCart(item);
+          window.location.href = "cart.html";
+        });
+
+        // Botón "Agregar al carro": agrega sin redirigir
+        btnAgregar.addEventListener("click", () => {
+          addToCart(item);
+          btnAgregar.textContent = "✔ Agregado al carrito";
+          btnAgregar.disabled = true;
+          setTimeout(() => {
+            btnAgregar.textContent = "Agregar al carro";
+            btnAgregar.disabled = false;
+          }, 1500);
+        });
+      }
+    });
+  });
+
+  // Observamos cambios en el DOM hasta que aparezcan los botones
+  observer.observe(document.body, { childList: true, subtree: true });
+});

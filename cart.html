@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang="es" >
-
+<html lang="es">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carrito de Compras</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/productsstyle.css">
 </head>
-
 <body>
+
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <li class="nav-item dropdown" id="userDropdownContainerMobile" style="display:none;">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdownMobile" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
@@ -28,6 +30,7 @@
           <li><button class="dropdown-item" id="logoutBtnMobile">Cerrar sesión</button></li>
         </ul>
       </li>
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
@@ -35,18 +38,11 @@
               <i class="fas fa-moon" id="theme-icon"></i>
             </button>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="my-profile.html">Perfil</a>
-          </li>
+          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
+          <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
+          <li class="nav-item"><a class="nav-link" href="my-profile.html">Perfil</a></li>
+          
           <li class="nav-item dropdown" id="userDropdownContainer" style="display:none;">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
@@ -61,32 +57,35 @@
       </div>
     </div>
   </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+
+  <div class="container mt-4">
+    <h2 class="mb-4 text-center">🛒 Carrito de Compras</h2>
+
+    <!-- Row con carrito y resumen -->
+    <div class="row">
+      <!-- Tabla del carrito -->
+      <div class="col-lg-8" id="cart-container" class="table-responsive"></div>
+
+      <!-- Resumen del pedido -->
+      <div class="col-lg-4">
+        <div id="cart-total-container" class="p-3 shadow-sm rounded bg-custom" style="display:none;">
+        <span id="cart-total"></span></p>
+        </div>
       </div>
     </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
   </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
+
+  <!-- Spinner de carga -->
+  <div id="spinner-wrapper">
+    <div class="spinner-border text-primary" role="status"></div>
+  </div>
+
+  <footer class="text-center mt-5 mb-3">
+    <p class="text-muted">© 2025 eMercado</p>
+  </footer>
+
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
