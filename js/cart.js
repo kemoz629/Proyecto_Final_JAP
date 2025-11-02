@@ -1,3 +1,9 @@
+// --- Inicializar carrito al cargar ---
+document.addEventListener("DOMContentLoaded", () => {
+  const carrito = JSON.parse(localStorage.getItem("cart")) || [];
+  mostrarCarrito(carrito);
+});
+
 // --- Mostrar carrito ---
 function mostrarCarrito(carrito) {
   const contenedorCarrito = document.getElementById("cart-container");
@@ -104,8 +110,4 @@ function quitarProducto(e) {
   mostrarCarrito(carrito);
 }
 
-// --- Inicializar carrito al cargar ---
-document.addEventListener("DOMContentLoaded", () => {
-  const carrito = JSON.parse(localStorage.getItem("cart")) || [];
-  mostrarCarrito(carrito);
-});
+
