@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const carrito = JSON.parse(localStorage.getItem("cart")) || [];
   mostrarCarrito(carrito);
+  updateValues();
 });
 
 // --- Mostrar carrito ---
@@ -110,4 +111,31 @@ function quitarProducto(e) {
   mostrarCarrito(carrito);
 }
 
+// --- Actualizar valores al cambiar moneda ---
+function updateValues() {
+  const currencySelect = document.getElementById("currency-select");
+  const selectedCurrency = currencySelect.value;
+  let carrito = JSON.parse(localStorage.getItem("cart")) || [];
+  const DOLLAR_EXCHANGE_VALUE = 40; // Valor fijo del dólar en pesos para conversiones
 
+  if(selectedCurrency === "USD") {
+    carrito = carrito.map(producto => {
+      if (producto.currency === "UYU") {
+        producto.cost = producto.cost / DOLLAR_EXCHANGE_VALUE;
+        producto.currency = "USD";
+      }
+      return producto;
+    });
+  } else if(selectedCurrency === "UYU") {
+    carrito = carrito.map(producto => {
+      if (producto.currency === "USD") {
+        producto.cost = producto.cost * DOLLAR_EXCHANGE_VALUE;
+        producto.currency = "UYU";
+      }
+      return producto;
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(carrito));
+  mostrarCarrito(carrito);
+}

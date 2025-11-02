@@ -6,6 +6,7 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
+const DOLLAR_EXCHANGE_VALUE = 40; // Valor fijo del dólar en pesos para conversiones
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -65,6 +66,12 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.removeItem("usuarioLogueado");
       window.location.href = "login.html";
     });
+
+    let badge = document.getElementById("cartItemCount");
+    let badgeMobile = document.getElementById("cartItemCountMobile");
+    let totalItems = obtenerCantidadTotal();
+    if(badge) badge.textContent = totalItems;
+    if(badgeMobile) badgeMobile.textContent = totalItems;
   }
 
   // Imagen de perfil en navbar
@@ -124,6 +131,28 @@ function applySavedTheme() {
   }
 }
 
+// --- Función para verificar carrito ---
+function verificarCarrito() {
+  const contenedorCarrito = document.getElementById("cart-container");
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  if (carrito.length === 0) {
+    contenedorCarrito.innerHTML = `
+      <div class="text-center py-5">
+        <h4>No hay productos en el carrito 🛒</h4>
+        <p>Agrega productos desde la sección de productos para verlos aquí.</p>
+      </div>
+    `;
+  } else {
+    mostrarCarrito(carrito);
+  }
+}
 
 // Ejecutar al cargar el DOM
 document.addEventListener('DOMContentLoaded', applySavedTheme);
+
+// --- Obtener cantidad total de productos en el carrito ---
+function obtenerCantidadTotal() {
+  const carrito = JSON.parse(localStorage.getItem("cart")) || [];
+  return carrito.reduce((total, producto) => total + producto.quantity, 0);
+}

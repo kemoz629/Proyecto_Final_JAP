@@ -61,6 +61,15 @@
   <div class="container mt-4">
     <h2 class="mb-4 text-center">🛒 Carrito de Compras</h2>
 
+    <!-- Selector de moneda -->
+    <div id="select-currency" class="table-responsive mb-4">
+      <label for="currency-select">Selecciona la moneda:</label>
+      <select id="currency-select" class="form-select" onchange="updateValues()">
+        <option value="USD">Dólares</option>
+        <option selected value="UYU">Pesos Uruguayos</option>
+      </select>
+    </div>
+
     <!-- Row con carrito y resumen -->
     <div class="row">
       <!-- Tabla del carrito -->

@@ -560,6 +560,66 @@ body.categories-page {
   border: 1px solid #6c757d;
 }
 
+/* Estilos para el badge del carrito - mobile */
+[data-bs-theme="dark"] .badgeCartMobile {
+  background-color: #0d6efd;
+  color: #fff;
+}
 
+[data-bs-theme="dark"] .badgeCartMobile::after {
+  border-color: #0d6efd;
+}
 
+[data-bs-theme="dark"] .badgeCartMobile:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
 
+.badgeCartMobile {
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  background-color: #ffc107;
+  color: #212529;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 10;
+}
+
+/* Estilos para el badge del carrito - desktop */
+[data-bs-theme="dark"] .badgeCart {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .badgeCart::after {
+  border-color: #0d6efd;
+}
+
+[data-bs-theme="dark"] .badgeCart:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.badgeCart {
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  background-color: #ffc107;
+  color: #212529;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 10;
+}
