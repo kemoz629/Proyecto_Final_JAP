@@ -66,12 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.removeItem("usuarioLogueado");
       window.location.href = "login.html";
     });
-
-    let badge = document.getElementById("cartItemCount");
-    let badgeMobile = document.getElementById("cartItemCountMobile");
+    
     let totalItems = obtenerCantidadTotal();
-    if(badge) badge.textContent = totalItems;
-    if(badgeMobile) badgeMobile.textContent = totalItems;
+    updateValueBadges(totalItems);
   }
 
   // Imagen de perfil en navbar
@@ -155,4 +152,12 @@ document.addEventListener('DOMContentLoaded', applySavedTheme);
 function obtenerCantidadTotal() {
   const carrito = JSON.parse(localStorage.getItem("cart")) || [];
   return carrito.reduce((total, producto) => total + producto.quantity, 0);
+}
+
+// --- Actualizar badges de conteo en el navbar ---
+function updateValueBadges(totalItems) {
+  const badge = document.getElementById("cartItemCount");
+  const badgeMobile = document.getElementById("cartItemCountMobile");
+  if(badge) badge.textContent = totalItems;
+  if(badgeMobile) badgeMobile.textContent = totalItems;
 }

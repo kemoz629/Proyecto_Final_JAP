@@ -230,6 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => {
             btnAgregar.textContent = "Agregar al carro";
             btnAgregar.disabled = false;
+            updateValueBadges(obtenerCantidadTotal());
           }, 1500);
         });
       }
