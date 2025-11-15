@@ -123,3 +123,130 @@ const cartStore = (() => {
     clear,
   };
 })();
+
+(function () {
+  // Ayudas
+  const $ = selector => document.querySelector(selector);
+  const $$ = selector => Array.from(document.querySelectorAll(selector));
+  const fmt = v => Number(v).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  const cartBody = $('#cart-body');
+  const grandSubtotalEl = $('#grand-subtotal');
+  const shippingCostEl = $('#shipping-cost');
+  const grandTotalEl = $('#grand-total');
+  const checkoutBtn = $('#checkout-btn');
+
+  // Leer el porcentaje de envío desde el radio seleccionado (retorna número, ej. 0.15)
+  function getSelectedShippingRate() {
+    const checked = document.querySelector('input[name="shipping"]:checked');
+    return checked ? parseFloat(checked.value) : 0;
+  }
+
+  // Recalcular el subtotal para una fila específica (tr.cart-item)
+  function recalcRow(row) {
+    const price = parseFloat(row.getAttribute('data-price')) || 0;
+    const qtyInput = row.querySelector('.qty');
+    let qty = Number(qtyInput.value);
+    if (!isFinite(qty) || qty < 0) qty = 0;
+    // Mantener cantidades enteras (opcional): qty = Math.floor(qty);
+    // Actualizar el input si se ajustó
+    if (String(qtyInput.value) !== String(qty)) qtyInput.value = qty;
+
+    const subtotal = price * qty;
+    const subtotalEl = row.querySelector('.line-subtotal');
+    if (subtotalEl) subtotalEl.textContent = fmt(subtotal);
+    return subtotal;
+  }
+
+  // Recalcular todos los totales y actualizar el DOM
+  function calculateTotals() {
+    const rows = $$('.cart-item');
+    let totalSubtotal = 0;
+    rows.forEach(row => {
+      totalSubtotal += recalcRow(row);
+    });
+
+    const shippingRate = getSelectedShippingRate();
+    const shippingCost = totalSubtotal * shippingRate;
+    const grandTotal = totalSubtotal + shippingCost;
+
+    grandSubtotalEl.textContent = fmt(totalSubtotal);
+    shippingCostEl.textContent = fmt(shippingCost);
+    grandTotalEl.textContent = fmt(grandTotal);
+  }
+
+  // Listeners delegados: escuchar cambios en inputs de cantidad y cambios en envío
+  function initEventListeners() {
+    // Escuchar eventos 'input' en cantidades usando delegación
+    cartBody.addEventListener('input', function (e) {
+      if (e.target && e.target.classList.contains('qty')) {
+        // Recalcular solo la fila afectada + totales
+        const row = e.target.closest('.cart-item');
+        if (row) {
+          recalcRow(row);
+          // actualizar totales usando todas las filas
+          calculateTotals();
+        }
+      }
+    });
+
+    // Si las cantidades cambian por evento 'change' (ej., spinner), manejarlo también
+    cartBody.addEventListener('change', function (e) {
+      if (e.target && e.target.classList.contains('qty')) {
+        const row = e.target.closest('.cart-item');
+        if (row) {
+          recalcRow(row);
+          calculateTotals();
+        }
+      }
+    });
+
+    // Cambio de opción de envío
+    const shippingRadios = document.querySelectorAll('input[name="shipping"]');
+    shippingRadios.forEach(r => {
+      r.addEventListener('change', () => {
+        calculateTotals();
+      });
+    });
+
+    // Si los productos se agregan/eliminan dinámicamente, observar mutaciones y recalcular
+    const observer = new MutationObserver(() => {
+      // No es necesario volver a adjuntar nada porque usamos delegación; solo recalcular totales
+      calculateTotals();
+    });
+    observer.observe(cartBody, { childList: true, subtree: true });
+
+    // Comportamiento inicial del botón - solo demostración (sin envío real, parte 3 únicamente)
+    checkoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Para la parte 3 no se hacen validaciones; solo mostrar los totales actuales
+      const totalsText = `Total actual: $${grandTotalEl.textContent} (Envío: $${shippingCostEl.textContent})`;
+      const feedback = document.getElementById('feedback');
+      if (feedback) {
+        feedback.textContent = totalsText;
+        // Borrar después de un pequeño retraso
+        setTimeout(() => { feedback.textContent = ''; }, 4000);
+      }
+    });
+  }
+
+  // Inicializar los subtotales de línea según data-price y cantidades existentes
+  function init() {
+    // Asegurar que los precios unitarios se muestren formateados correctamente (si los atributos eran crudos)
+    $$('.cart-item').forEach(row => {
+      const price = parseFloat(row.getAttribute('data-price')) || 0;
+      const unitPriceSpan = row.querySelector('.unit-price');
+      if (unitPriceSpan) unitPriceSpan.textContent = fmt(price);
+    });
+
+    initEventListeners();
+    calculateTotals();
+  }
+
+  // Ejecutar init en DOMContentLoaded (si el script está en <head>)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
