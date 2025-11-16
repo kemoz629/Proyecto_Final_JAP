@@ -155,6 +155,8 @@ function obtenerCantidadTotal() {
 }
 
 // --- Actualizar badges de conteo en el navbar ---
+//--- Breve explicación por Facu: Agarra los elementos del contador del carrito tanto en la versión normal como en la versión mobile usando sus IDs, 
+// y les actualiza el texto con la cantidad total de ítems que le pasámos. 
 function updateValueBadges(totalItems) {
   const badge = document.getElementById("cartItemCount");
   const badgeMobile = document.getElementById("cartItemCountMobile");

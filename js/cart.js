@@ -78,6 +78,9 @@ function mostrarCarrito(carrito) {
 }
 
 // --- Actualizar cantidad ---
+//---Explicación breve por Facu:agarra el índice del producto desde el input que tocaste,
+//  carga el carrito del localStorage, cambia la cantidad de ese producto con el valor nuevo del input, 
+// guarda el carrito actualizado de vuelta en localStorage y finalmente vuelve a renderizar el carrito en pantalla. 
 function actualizarCantidad(e) {
   const index = e.target.dataset.index;
   let carrito = JSON.parse(localStorage.getItem("cart")) || [];
@@ -87,7 +90,10 @@ function actualizarCantidad(e) {
   actualizarCostos();
 }
 
-// --- Quitar producto ---
+// --- Quitar producto --- 
+//agarramos el índice del producto desde el botón que toca el usuario usando el data-index, 
+// después carga el carrito que está guardado en el localStorage, borra ese producto del array usando splice, 
+// vuelve a guardar el carrito ya actualizado en el localStorage y, por último, llama a mostrarCarrito para refrescar la vista en pantalla.
 function quitarProducto(e) {
   const index = e.target.dataset.index;
   let carrito = JSON.parse(localStorage.getItem("cart")) || [];
@@ -112,7 +118,7 @@ function updateValues() {
       }
       return producto;
     });
-  } else if(selectedCurrency === "UYU") {
+  } else if(selectedCurrency === "UYU") {ç
     carrito = carrito.map(producto => {
       if (producto.currency === "USD") {
         producto.cost = producto.cost * DOLLAR_EXCHANGE_VALUE;
