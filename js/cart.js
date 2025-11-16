@@ -3,9 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const carrito = JSON.parse(localStorage.getItem("cart")) || [];
   mostrarCarrito(carrito);
   updateValues();
-  actualizarCostos();
+  actualizarCostos(); // Calcular costos iniciales
+
+  // Event listener para finalizar compra
+  document.getElementById("checkoutButton").addEventListener("click", finalizarCompra);
 });
 
+// --- Mostrar carrito ---
+// Función que renderiza la tabla del carrito con los productos actuales
 function mostrarCarrito(carrito) {
   const contenedorCarrito = document.getElementById("cart-container");
 
@@ -75,6 +80,13 @@ function mostrarCarrito(carrito) {
   document.querySelectorAll(".btn-quitar").forEach(btn => {
     btn.addEventListener("click", quitarProducto);
   });
+
+  // Escuchar cambios en tipo de envío
+  document.querySelectorAll('input[name="shippingType"]').forEach(radio => {
+    radio.addEventListener("change", actualizarCostos);
+  });
+
+  actualizarCostos(); // Actualizar costos después de mostrar carrito
 }
 
 // --- Actualizar cantidad ---
@@ -104,6 +116,7 @@ function quitarProducto(e) {
 }
 
 // --- Actualizar valores al cambiar moneda ---
+// Función que convierte los precios según la moneda seleccionada
 function updateValues() {
   const currencySelect = document.getElementById("currency-select");
   const selectedCurrency = currencySelect.value;
