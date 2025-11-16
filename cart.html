@@ -70,15 +70,165 @@
       </select>
     </div>
 
-    <!-- Row con carrito y resumen -->
-    <div class="row">
+    <!-- Row principal -->
+    <div class="row g-4">
       <!-- Tabla del carrito -->
-      <div class="col-lg-8" id="cart-container" class="table-responsive"></div>
+      <div class="col-lg-7" id="cart-container"></div>
 
-      <!-- Resumen del pedido -->
-      <div class="col-lg-4">
-        <div id="cart-total-container" class="p-3 shadow-sm rounded bg-custom" style="display:none;">
-        <span id="cart-total"></span></p>
+      <!-- Flujo de compra -->
+      <div class="col-lg-5">
+        <div class="accordion" id="checkoutAccordion">
+          <!-- Tipo de envío -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingShipping">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShipping" aria-expanded="true" aria-controls="collapseShipping">
+                Tipo de envío
+              </button>
+            </h2>
+            <div id="collapseShipping" class="accordion-collapse collapse show" aria-labelledby="headingShipping" data-bs-parent="#checkoutAccordion">
+              <div class="accordion-body">
+                <p class="text-muted mb-3">Elegí cómo querés recibir tu compra.</p>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="radio" name="shippingType" id="shippingPremium" value="premium" data-percentage="0.15" checked>
+                  <label class="form-check-label" for="shippingPremium">
+                    Premium 2 a 5 días (15%)
+                  </label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="radio" name="shippingType" id="shippingExpress" value="express" data-percentage="0.07">
+                  <label class="form-check-label" for="shippingExpress">
+                    Express 5 a 8 días (7%)
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="shippingType" id="shippingStandard" value="standard" data-percentage="0.05">
+                  <label class="form-check-label" for="shippingStandard">
+                    Standard 12 a 15 días (5%)
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dirección de envío -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingAddress">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAddress" aria-expanded="false" aria-controls="collapseAddress">
+                Dirección de envío
+              </button>
+            </h2>
+            <div id="collapseAddress" class="accordion-collapse collapse" aria-labelledby="headingAddress" data-bs-parent="#checkoutAccordion">
+              <div class="accordion-body">
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label for="addressDepartment" class="form-label">Departamento</label>
+                    <input type="text" class="form-control" id="addressDepartment" placeholder="Ej: Montevideo">
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="addressCity" class="form-label">Localidad</label>
+                    <input type="text" class="form-control" id="addressCity" placeholder="Ej: Pocitos">
+                  </div>
+                  <div class="col-12">
+                    <label for="addressStreet" class="form-label">Calle</label>
+                    <input type="text" class="form-control" id="addressStreet" placeholder="Nombre de la calle">
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="addressNumber" class="form-label">Número</label>
+                    <input type="text" class="form-control" id="addressNumber" placeholder="Nº de puerta">
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="addressCorner" class="form-label">Esquina</label>
+                    <input type="text" class="form-control" id="addressCorner" placeholder="Esquina más cercana">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Forma de pago -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingPayment">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePayment" aria-expanded="false" aria-controls="collapsePayment">
+                Forma de pago
+              </button>
+            </h2>
+            <div id="collapsePayment" class="accordion-collapse collapse" aria-labelledby="headingPayment" data-bs-parent="#checkoutAccordion">
+              <div class="accordion-body">
+                <ul class="nav nav-tabs mb-3" id="paymentTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="credit-tab" data-bs-toggle="tab" data-bs-target="#credit" type="button" role="tab">Tarjeta de crédito</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="bank-tab" data-bs-toggle="tab" data-bs-target="#bank" type="button" role="tab">Transferencia bancaria</button>
+                  </li>
+                </ul>
+                <div class="tab-content" id="paymentTabContent">
+                  <div class="tab-pane fade show active" id="credit" role="tabpanel">
+                    <div class="mb-3">
+                      <label for="cardNumber" class="form-label">Número de tarjeta</label>
+                      <input type="text" class="form-control" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX">
+                    </div>
+                    <div class="row g-3">
+                      <div class="col-sm-6">
+                        <label for="cardName" class="form-label">Nombre y apellido</label>
+                        <input type="text" class="form-control" id="cardName" placeholder="Como figura en la tarjeta">
+                      </div>
+                      <div class="col-sm-3">
+                        <label for="cardExp" class="form-label">Vencimiento</label>
+                        <input type="text" class="form-control" id="cardExp" placeholder="MM/AA">
+                      </div>
+                      <div class="col-sm-3">
+                        <label for="cardCvv" class="form-label">CVV</label>
+                        <input type="text" class="form-control" id="cardCvv" placeholder="123">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="bank" role="tabpanel">
+                    <div class="mb-3">
+                      <label for="bankName" class="form-label">Banco</label>
+                      <input type="text" class="form-control" id="bankName" placeholder="Nombre del banco">
+                    </div>
+                    <div class="mb-3">
+                      <label for="accountNumber" class="form-label">Número de cuenta</label>
+                      <input type="text" class="form-control" id="accountNumber" placeholder="Cuenta corriente o caja de ahorro">
+                    </div>
+                    <div class="mb-3">
+                      <label for="transferAlias" class="form-label">Alias / Referencia</label>
+                      <input type="text" class="form-control" id="transferAlias" placeholder="Alias para la transferencia">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resumen de costos -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSummary">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary">
+                Costos
+              </button>
+            </h2>
+            <div id="collapseSummary" class="accordion-collapse collapse" aria-labelledby="headingSummary" data-bs-parent="#checkoutAccordion">
+              <div class="accordion-body">
+                <ul class="list-group mb-3">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Subtotal
+                    <span id="summarySubtotal">-</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Costo de envío
+                    <span id="summaryShipping">-</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                    Total
+                    <span id="summaryTotal">-</span>
+                  </li>
+                </ul>
+                <button class="btn btn-success w-100" id="checkoutButton" type="button">Finalizar compra</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
