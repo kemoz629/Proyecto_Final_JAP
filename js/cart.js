@@ -1,4 +1,4 @@
-// Inicializar carrito al cargar 
+// Inicializar carrito al cargar: traemos lo guardado en localStorage y dejamos todo listo
 document.addEventListener("DOMContentLoaded", () => {
   const carrito = JSON.parse(localStorage.getItem("cart")) || [];
   mostrarCarrito(carrito);
@@ -6,7 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
   actualizarCostos(); // Calcular costos iniciales
 
   // Event listener para finalizar compra
-  document.getElementById("checkoutButton").addEventListener("click", finalizarCompra);
+    document.getElementById("checkoutButton").addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      finalizarCompra(event);
+      return false;
+    });
 });
 
 // --- Mostrar carrito ---
@@ -131,7 +136,7 @@ function updateValues() {
       }
       return producto;
     });
-  } else if(selectedCurrency === "UYU") {ç
+  } else if(selectedCurrency === "UYU") {
     carrito = carrito.map(producto => {
       if (producto.currency === "USD") {
         producto.cost = producto.cost * DOLLAR_EXCHANGE_VALUE;
@@ -182,14 +187,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btnFinalizar = document.getElementById("checkoutButton");
-  if (btnFinalizar) {
-    btnFinalizar.addEventListener("click", finalizarCompra);
+// Reúne los datos del formulario, valida un paso a la vez y arma el payload para el backend
+async function finalizarCompra(event) {
+  if (event) {
+    if (typeof event.preventDefault === "function") {
+      event.preventDefault();
+    }
+    if (typeof event.stopPropagation === "function") {
+      event.stopPropagation();
+    }
   }
-});
-
-function finalizarCompra() {
   // Validación 1: Campos de dirección
   const depto = document.getElementById("addressDepartment").value.trim();
   const ciudad = document.getElementById("addressCity").value.trim();
@@ -256,20 +263,104 @@ function finalizarCompra() {
   }
 
   // Si todo está bien, mostrar éxito
-  const tipoEnvio = envio.nextElementSibling.textContent;
-  const tipoPago = isCreditActive ? "Tarjeta de crédito" : "Transferencia bancaria";
+  const subtotal = carrito.reduce((acc, item) => acc + item.cost * item.quantity, 0);
+  const porcentajeEnvio = parseFloat(envio.getAttribute('data-percentage'));
+  const shippingCost = subtotal * porcentajeEnvio;
+  const total = subtotal + shippingCost;
+  const currency = carrito[0].currency;
 
-  mostrarAlerta(`<strong>¡Compra exitosa!</strong><br>Envío: ${tipoEnvio}<br>Pago: ${tipoPago}`, "success");
+  const paymentMethod = isCreditActive ? "credit" : "bank";
+  const paymentDetails = isCreditActive ? {
+    cardHolder: document.getElementById("cardName").value.trim(),
+    last4: document.getElementById("cardNumber").value.trim().slice(-4),
+    exp: document.getElementById("cardExp").value.trim()
+  } : {
+    bankName: document.getElementById("bankName").value.trim(),
+    accountNumber: document.getElementById("accountNumber").value.trim(),
+    alias: document.getElementById("transferAlias").value.trim()
+  };
 
-  // Limpiar carrito y redirigir
-  setTimeout(() => {
+  // Este objeto coincide con lo que espera el backend Express/SQLite
+  const payload = {
+    items: carrito,
+    shipping: {
+      method: envio.value,
+      department: depto,
+      city: ciudad,
+      street: calle,
+      number: numero,
+      corner: esquina
+    },
+    payment: {
+      method: paymentMethod,
+      details: paymentDetails
+    },
+    totals: {
+      subtotal,
+      shipping: shippingCost,
+      total,
+      currency
+    }
+  };
+
+  const checkoutBtn = document.getElementById("checkoutButton"); // Evita clics repetidos mientras se envía
+  checkoutBtn.disabled = true;
+  checkoutBtn.textContent = "Procesando...";
+
+  try {
+    const respuesta = await enviarCarritoAlBackend(payload);
+    const duracionExito = 6000;
+    const alertaCompra = mostrarAlerta(
+      `<strong>${respuesta.message}</strong><br>ID de carrito: ${respuesta.cartId}`,
+      "success",
+      { duracion: duracionExito }
+    ); // Mostramos el id devuelto por SQLite
     localStorage.removeItem("cart");
-    window.location.href = "index.html";
-  }, 3000);
+    mostrarCarrito([]);
+    updateValueBadges(0);
+  } catch (error) {
+    mostrarAlerta(error.message || "No se pudo registrar tu compra", "error");
+  } finally {
+    checkoutBtn.disabled = false;
+    checkoutBtn.textContent = "Finalizar compra";
+  }
 }
 
-// Alertas
-function mostrarAlerta(mensaje, tipo = "info") {
+// Envía el carrito al backend protegido con JWT (ruta /cart)
+async function enviarCarritoAlBackend(payload) {
+  const token = localStorage.getItem("authToken");
+  const headers = {
+    "Content-Type": "application/json"
+  };
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(CART_SAVE_URL, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(payload)
+  });
+
+  if (response.status === 401) {
+    if (typeof handleUnauthorizedAccess === "function") {
+      handleUnauthorizedAccess();
+    }
+    throw new Error("Sesión expirada");
+  }
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.message || "No se pudo guardar el carrito");
+  }
+
+  return data;
+}
+
+// Pequeño helper para mostrar alertas flotantes reutilizables
+function mostrarAlerta(mensaje, tipo = "info", opciones = {}) {
   const colores = {
     "error": "alerta-error",
     "success": "alerta-success",
@@ -293,9 +384,13 @@ function mostrarAlerta(mensaje, tipo = "info") {
   
   document.body.appendChild(alerta);
 
-  const tiempo = tipo === "success" ? 3000 : 5000;
-  setTimeout(() => {
-    alerta.style.animation = "slideOut 0.3s ease-in-out";
-    setTimeout(() => alerta.remove(), 300);
-  }, tiempo);
+  const tiempo = opciones.duracion || (tipo === "success" ? 5000 : 5000);
+  if (tiempo > 0) {
+    setTimeout(() => {
+      alerta.style.animation = "slideOut 0.3s ease-in-out";
+      setTimeout(() => alerta.remove(), 300);
+    }, tiempo);
+  }
+
+  return alerta;
 }

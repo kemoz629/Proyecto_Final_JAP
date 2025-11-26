@@ -1,10 +1,15 @@
-const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
-const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publish.json";
-const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/";
-const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
-const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
-const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
-const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
+// URLs base del backend Express que creamos para reemplazar los JSON locales
+const BACKEND_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = `${BACKEND_BASE_URL}/api`;
+// Endpoints que siguen entregando los archivos de la letra pero ahora pasan por el backend (y su middleware)
+const CATEGORIES_URL = `${API_BASE_URL}/cats/cat.json`;
+const PUBLISH_PRODUCT_URL = `${API_BASE_URL}/sell/publish.json`;
+const PRODUCTS_URL = `${API_BASE_URL}/cats_products/`;
+const PRODUCT_INFO_URL = `${API_BASE_URL}/products/`;
+const PRODUCT_INFO_COMMENTS_URL = `${API_BASE_URL}/products_comments/`;
+const CART_INFO_URL = `${API_BASE_URL}/user_cart/`;
+const CART_BUY_URL = `${API_BASE_URL}/cart/buy.json`;
+const CART_SAVE_URL = `${BACKEND_BASE_URL}/cart`; // Ruta nueva para guardar el carrito en SQLite
 const EXT_TYPE = ".json";
 const DOLLAR_EXCHANGE_VALUE = 40; // Valor fijo del dólar en pesos para conversiones
 
@@ -16,11 +21,27 @@ let hideSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "none";
 }
 
-let getJSONData = function(url){
+// Función auxiliar que envuelve a fetch: agrega el token, muestra el spinner y captura errores
+let getJSONData = function(url, fetchOptions = {}){
   let result = {};
   showSpinner();
-  return fetch(url)
+
+  const token = localStorage.getItem("authToken");
+  const headers = new Headers(fetchOptions.headers || {});
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`); // Todas las llamadas pasan por el backend autenticado
+  }
+
+  const options = { ...fetchOptions, headers };
+
+  return fetch(url, options)
   .then(response => {
+    if (response.status === 401) {
+      hideSpinner();
+      handleUnauthorizedAccess(); // Si el token ya no sirve volvemos al login para evitar errores en cascada
+      throw Error("Sesión expirada");
+    }
+
     if (response.ok) {
       return response.json();
     } else {
@@ -63,8 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("logoutBtnMobile");
 
     logoutBtn.addEventListener("click", function () {
-      localStorage.removeItem("usuarioLogueado");
-      window.location.href = "login.html";
+      handleUnauthorizedAccess();
     });
     
     let totalItems = obtenerCantidadTotal();
@@ -93,11 +113,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --- Verificar contenido del carrito si estamos en cart.html ---
   if (window.location.pathname.includes("cart.html")) {
-    verificarCarrito();
+    verificarCarrito(); // Revisa el carrito guardado localmente antes de mostrar la tabla
   }
 });
 
-if (!localStorage.getItem('usuarioLogueado')) {
+if (!localStorage.getItem('usuarioLogueado') || !localStorage.getItem('authToken')) {
   window.location.href = 'login.html';
 }
 
@@ -162,4 +182,11 @@ function updateValueBadges(totalItems) {
   const badgeMobile = document.getElementById("cartItemCountMobile");
   if(badge) badge.textContent = totalItems;
   if(badgeMobile) badgeMobile.textContent = totalItems;
+}
+
+function handleUnauthorizedAccess() {
+  // Borra datos de sesión y fuerza al usuario a reingresar, evitando llamadas con tokens vencidos
+  localStorage.removeItem("usuarioLogueado");
+  localStorage.removeItem("authToken");
+  window.location.href = "login.html";
 }
