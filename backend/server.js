@@ -340,5 +340,5 @@ app.use((req, res) => {
 
 // Levantamos el servidor HTTP en el puerto indicado
 app.listen(PORT, () => {
-	console.log(`Servidor eCommerce escuchando en http://localhost:${PORT}`);
+	console.log(`Escuchando en http://localhost:${PORT}`);
 });
