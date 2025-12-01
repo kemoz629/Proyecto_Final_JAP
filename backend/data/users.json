@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "username": "usuario@jap.com",
+    "fullName": "Usuario Demo",
+    "passwordHash": "$2a$10$IOKC2szNfJcvWbWAQhqh7et2znOaT.9qWoJn8rKa4nue0NJdaPPxu"
+  }
+]
